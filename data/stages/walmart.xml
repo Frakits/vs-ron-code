@@ -1,0 +1,4 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.1" folder="stages/">
+   <sprite name="walmart" sprite="wallmart" scale="1.2"/>
+</stage>

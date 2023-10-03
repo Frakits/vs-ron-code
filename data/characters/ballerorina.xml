@@ -1,0 +1,12 @@
+<!DOCTYPE codename-engine-character>
+<character holdTime="4" sprite="ballerorina" camx="-175" scale="0.5" camy="91" flipX="false" isPlayer="false"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+
+   <anim loop="true" x="0" anim="ballerorina idle" fps="12" y="0" name="idle"/>
+   <anim loop="false" x="0" anim="ballerorina left" fps="8" y="0" name="singLEFT"/>
+   <anim loop="false" x="0" anim="ballerorina down" fps="12" y="0" name="singDOWN"/>
+   <anim loop="false" x="0" anim="ballerorina up" fps="12" y="0" name="singUP"/>
+   <anim loop="false" x="0" anim="ballerorina right" fps="12" y="0" name="singRIGHT"/>
+   <anim loop="false" x="0" anim="ballerorina baller" fps="12" y="0" name="bye"/>
+   <anim loop="false" x="0" anim="ballerorina this is a certified" fps="8" y="0" name="hey"/>
+
+</character>

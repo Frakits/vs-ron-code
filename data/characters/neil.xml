@@ -1,0 +1,6 @@
+<!DOCTYPE codename-engine-character>
+<character isPlayer="false" flipX="false" holdTime="4" sprite="neil"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+
+   <anim name="Idle" anim="neil" loop="false" x="-30" y="-530"/>
+
+</character>

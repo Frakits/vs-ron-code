@@ -1,0 +1,10 @@
+<!DOCTYPE codename-engine-character>
+<character isPlayer="false" flipX="false" holdTime="4" sprite="weed ron" scale="1.7"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+
+   <anim name="idle" anim="weed ron idle" loop="true" x="13" y="-190"/>
+   <anim name="singRIGHT" anim="weed ron right" loop="true" x="-45" y="-194"/>
+   <anim name="singLEFT" anim="weed ron left" loop="true" x="8" y="-193"/>
+   <anim name="singDOWN" anim="weed ron down" loop="true" x="-10" y="-210"/>
+   <anim name="singUP" anim="weed ron up" loop="true" x="9" y="-168"/>
+
+</character>

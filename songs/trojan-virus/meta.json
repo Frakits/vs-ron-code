@@ -1,0 +1,8 @@
+{
+    "displayName": "Trojan Virus",
+    "bpm": 180.0,
+    "icon": "ronPower",
+    "color": "#9271FD",
+    "coopAllowed": true,
+    "opponentModeAllowed": true
+}

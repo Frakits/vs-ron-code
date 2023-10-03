@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character x="0" y="300" camx="0" icon="ronMad" isGF="false" camy="0" iconColor="-10855846" flipX="false" isPlayer="false" holdTime="4" gameOverChar="null" antialiasing="false" sprite="ronMad">
+	<anim loop="true" x="0" anim="ron angery idle" fps="24" y="0" name="idle" indices="[]"/>
+	<anim loop="false" x="95" anim="ron angery left" fps="24" y="-18" name="singLEFT" indices="[]"/>
+	<anim loop="false" x="-52" anim="ron angery down" fps="24" y="-10" name="singDOWN" indices="[]"/>
+	<anim loop="false" x="34" anim="ron angery up" fps="24" y="42" name="singUP" indices="[]"/>
+	<anim loop="false" x="-62" anim="ron angery right" fps="24" y="-5" name="singRIGHT" indices="[]"/>
+</character>

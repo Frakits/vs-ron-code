@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.8" folder="stages/pissedStreet/">
+   	<sprite name="sky" x="-800" y="-400" sprite="wasted_sky" />
+   	<sprite name="city" x="-800" y="-400" sprite="wasted_city" />
+   	<sprite name="mountains" x="-800" y="-400" sprite="wasted_mountains" />
+   	<sprite name="hillfront" x="-800" y="-400" sprite="wasted_hillfront" />
+   	<sprite name="fog" x="-800" y="-400" sprite="fog" scale="3" />
+   	<sprite name="street" x="-800" y="-400" sprite="wasted_street" />
+</stage>

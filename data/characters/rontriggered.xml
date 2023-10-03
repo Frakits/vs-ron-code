@@ -1,0 +1,11 @@
+<!DOCTYPE codename-engine-character>
+<character isPlayer="false" flipX="false" holdTime="4" sprite="madron"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+
+   <anim name="idle" anim="Idle" loop="true" x="152" y="240"/>
+   <anim name="singLEFT" anim="Sing Left" loop="false" x="154" y="240"/>
+   <anim name="singDOWN" anim="Sing Down" loop="false" x="150" y="230"/>
+   <anim name="singUP" anim="Sing Up" loop="false" x="153" y="237"/>
+   <anim name="singRIGHT" anim="Sing Right" loop="false" x="150" y="232"/>
+   <anim name="hey" anim="Ugh" loop="false" x="257" y="165"/>
+
+</character>

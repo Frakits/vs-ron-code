@@ -1,0 +1,12 @@
+<!DOCTYPE codename-engine-character>
+<character isPlayer="false" flipX="false" holdTime="6.1" sprite="dave_sheet"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+
+   <anim name="idle" anim="idle" loop="true" x="0" y="0"/>
+   <anim name="singRIGHT" anim="right0" loop="false" x="-27" y="0"/>
+   <anim name="singLEFT" anim="left0" loop="false" x="1" y="11"/>
+   <anim name="singUP" anim="up0" loop="false" x="-12" y="18"/>
+   <anim name="singDOWN" anim="down0" loop="false" x="-28" y="12"/>
+   <anim name="err" anim="hey" loop="false" x="10" y="10"/>
+   <anim name="um" anim="hey" loop="false" x="8" y="9"/>
+
+</character>
