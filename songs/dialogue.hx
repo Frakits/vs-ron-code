@@ -16,7 +16,7 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 	var music:FlxSound = new FlxSound().loadEmbedded(Paths.music("talking-in-a-cool-way"));
 	public var finishCallback:Void->Void;
 	trace(0);
-	var dialogueJSON:Array = Json.parse(Assets.getText(Paths.file("songs/" + curSong + "/dialogue.json"))).dialogue;
+	var dialogueJSON:Array = Json.parse(Assets.getText(Paths.file("songs/" + curSong + "/dialogue.json")));
 	trace(0.5);
 	var preloadPortraits = ["bruh" => new FlxSprite()];
 	var curDialogue:Int = 0;
