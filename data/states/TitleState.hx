@@ -24,11 +24,3 @@ function beatHit(curBeat) {
 	FlxG.camera.zoom += 0.03;
 	FlxTween.tween(FlxG.camera, {zoom: 1}, Conductor.crochet / 1500, {ease: FlxEase.backOut});
 }
-var switched = false;
-function onStateSwitch(event) {
-	if (switched != (switched = true)) {
-		FlxG.switchState(new ModState("DesktopState"));
-		event.cancel();
-		trace("h");
-	}
-}

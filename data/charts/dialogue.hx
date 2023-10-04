@@ -6,12 +6,11 @@ import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText.FlxTextFormatMarkerPair;
 import StringTools;
 var didCancel = false;
-function onStartCountdown(event) {
-	trace("hi");
-	event.cancel();
-}
 if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
-
+	function onStartCountdown(event) {
+		trace("hi");
+		event.cancel();
+	}
 	var spriteGroup = new FlxSpriteGroup();
 	public var dialogueWorks:Bool = true;
 	var music:FlxSound = new FlxSound().loadEmbedded(Paths.music("talking-in-a-cool-way"));

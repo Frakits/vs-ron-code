@@ -82,7 +82,7 @@ function create() {
 					else if (icons[i].length != 0)
 						CoolUtil.browserLoad(icons[i]);
 					else
-						MusicBeatState.switchState(icons[i]);
+						FlxG.switchState(icons[i]);
 				}
 					
 			}
