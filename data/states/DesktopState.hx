@@ -81,7 +81,7 @@ function create() {
 						});
 					}
 					else if (icons[i].length != 0)
-						CoolUtil.browserLoad(icons[i]);
+						CoolUtil.openURL(icons[i]);
 					else
 						FlxG.switchState(icons[i]);
 				}
@@ -101,7 +101,7 @@ function create() {
 }
 function update(elapsed:Float) {
 	FlxG.mouse.visible = true;
-	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) add(new Winver());
+	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) new Winver();
 }
 import flixel.group.FlxSpriteGroup;
 class RunTab extends flixel.FlxBasic {
