@@ -2,6 +2,7 @@ import funkin.editors.ui.UIState;
 import funkin.backend.system.Main;
 import funkin.menus.MainMenuState;
 import funkin.backend.scripting.ModState;
+import flixel.FlxG;
 var memoryCounter = 0.0;
 function update() {
     FlxG.autoPause = false;
@@ -12,8 +13,12 @@ function update() {
     Main.framerateSprite.codenameBuildField.y = Main.framerateSprite.memoryCounter.y;
     Main.framerateSprite.memoryCounter.height = 0;
 }
-var switched = false;
-function preStateCreate(state:FlxState) {
-	if (state is MainMenuState) 
-        FlxG.switchState(new FreeplayState());
+var redirectStates:Map<FlxState, FlxState> = [
+    MainMenuState => new ModState("DesktopState"), 
+];
+
+function preStateSwitch() {
+    for (redirectState in redirectStates.keys()) 
+        if (Std.isOfType(FlxG.game._requestedState, redirectState)) 
+            FlxG.game._requestedState = redirectStates.get(redirectState);
 }

@@ -152,7 +152,7 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 			for (d=>i in retroes) FlxTween.tween(i, {alpha:0}, 1, {ease: FlxEase.quintOut});
 			for (d=>i in preloadPortraits) FlxTween.tween(i, {alpha:0}, 1, {ease: FlxEase.quintOut});
 			for (a in [bg, curPortrait, dialoguebox, dialogText, dialogHand, backdropThingy])
-				FlxTween.tween(a, {alpha: 0}, 1, {ease: FlxEase.quintOut, onComplete: function(twn:FlxTween) {finishCallback();remove(spriteGroup);spriteGroup.destroy();
+				FlxTween.tween(a, {alpha: 0}, 1, {ease: FlxEase.quintOut, onComplete: function(twn:FlxTween) {trace("Deez"); finishCallback();remove(spriteGroup);spriteGroup.destroy();
 				}});
 			return;
 		}

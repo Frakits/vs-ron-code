@@ -4,6 +4,7 @@ import funkin.options.OptionsMenu;
 import funkin.menus.credits.CreditsMain;
 import flixel.addons.display.FlxBackdrop;
 import flixel.ui.FlxButton;
+trace("hi");
 var icons:Map<String, Dynamic> = [
 	"discord" => "https://discord.gg/ron-874366610918473748",
 	"random" => "https://www.facebook.com",
@@ -100,45 +101,49 @@ function create() {
 }
 function update(elapsed:Float) {
 	FlxG.mouse.visible = true;
-	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) add(new RunTab());
+	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) add(new Winver());
 }
-class RunTab extends FlxBasic {
-	var tab:FlxSprite;
-	var ok:FlxButton;
-	var cancel:FlxButton;
-	var exit:FlxButton;
-	var help:FlxButton;
-	var field:FlxUIInputText;
-	var tabBar:FlxButton;
-	var t = Paths.getSparrowAtlas("windowsUi/run tab");
+import flixel.group.FlxSpriteGroup;
+class RunTab extends flixel.FlxBasic {
+	public var runGroup:FlxSpriteGroup;
+	public var tab:FlxSprite;
+	public var ok:FlxButton;
+	public var cancel:FlxButton;
+	public var exit:FlxButton;
+	public var help:FlxButton;
+	//var field:FlxUIInputText;
+	public var tabBar:FlxButton;
+	var t = Paths.getSparrowAtlas("menus/desktop/windowsUi/run tab");
 	var justMousePos = new FlxPoint();
 	var justTaskBarPos = new FlxPoint();
 	var movingTab = false;
 	public function new() {
 		super();
-		field = new FlxUIInputText(58, 643, 270, "", 18);
-		field.font = Paths.font("w95.otf");
-		field.callback = function(text, action) {
-			if (action == "enter") {
-				triggerRunEvent(field.text);
-				destroy();
-			}
-		}
-		add(field);
+		//field = new FlxUIInputText(58, 643, 270, "", 18);
+		//field.font = Paths.font("w95.otf");
+		//field.callback = function(text, action) {
+		//	if (action == "enter") {
+		//		triggerRunEvent(field.text);
+		//		destroy();
+		//	}
+		//}
+		//add(field);
+		runGroup = new FlxSpriteGroup();
+		FlxG.state.add(runGroup);
 		tab = new FlxSprite(0, 560);
 		tab.frames = t;
 		tab.animation.addByPrefix("d", "tab");
 		tab.animation.play("d");
-		add(tab); //270 text field length
+		runGroup.add(tab); //270 text field length
 		ok = new FlxButton(177, 685, "", function() {
-			triggerRunEvent(field.text);
-			destroy();
+			//triggerRunEvent(field.text);
+			runGroup.destroy();
 		});
 		cancel = new FlxButton(258, 685, "", function() {
-			destroy();
+			runGroup.destroy();
 		});
 		help = new FlxButton(308, 566, "", function() {
-			CoolUtil.browserLoad("www.facebook.com");
+			CoolUtil.openURL("www.facebook.com");
 		});
 		exit = new FlxButton(327, 566, "", cancel.onUp.callback);
 		for (i=>button in [ok, cancel, help, exit]) {
@@ -148,7 +153,7 @@ class RunTab extends FlxBasic {
 			button.animation.addByPrefix("highlight", animIndex[i] + " neutral");
 			button.animation.addByPrefix("pressed", animIndex[i] + " pressed");
 			button.updateHitbox();
-			add(button);
+			runGroup.add(button);
 		}
 		help.setSize(15,13);
 		exit.setSize(15,13);
@@ -157,62 +162,60 @@ class RunTab extends FlxBasic {
 		tabBar.height = 20;
 		tabBar.alpha = 0;
 		tabBar.allowSwiping = true;
-		add(tabBar);
+		runGroup.add(tabBar);
 	}
 	public override function update(elapsed) {
 		super.update(elapsed);
 		if (tabBar.status == 2)
 			if (FlxG.mouse.justPressed) movingTab = true;
 		if (movingTab) {
-			button.x += FlxG.mouse.deltaX;
-			button.y += FlxG.mouse.deltaY;
+			runGroup.x += FlxG.mouse.deltaX;
+			runGroup.y += FlxG.mouse.deltaY;
+			if (FlxG.mouse.justReleased) movingTab = false;
 		}
 	}
 }
 
-class Winver extends FlxGroup {
-	var tab = new FlxSprite(55, 55).loadGraphic(Paths.image("windowsUi/winver"));
-	var ok:FlxButton;
-	var exit:FlxButton;
-	var tabBar:FlxButton;
+class Winver extends flixel.FlxBasic {
+	public var runGroup:FlxSpriteGroup;
+	public var tab = new FlxSprite(55, 55).loadGraphic(Paths.image("menus/desktop/windowsUi/winver"));
+	public var ok:FlxButton;
+	public var exit:FlxButton;
+	public var tabBar:FlxButton;
 	public function new() {
 		super();
-		add(tab);
+		runGroup = new FlxSpriteGroup();
+		FlxG.state.add(runGroup);
+		runGroup.add(tab);
 		ok = new FlxButton(175, 238, "", function() {
-			destroy();
+			runGroup.destroy();
 		});
 		exit = new FlxButton(340, 60, "", ok.onUp.callback);
 		for (i=>button in [ok,exit]) {
-			button.frames = Paths.getSparrowAtlas("windowsUi/run tab");
+			button.frames = Paths.getSparrowAtlas("menus/desktop/windowsUi/run tab");
 			var animIndex = ["ok", "exit"];
 			button.animation.addByPrefix("normal", animIndex[i] + " neutral");
 			button.animation.addByPrefix("highlight", animIndex[i] + " neutral");
 			button.animation.addByPrefix("pressed", animIndex[i] + " pressed");
 			button.updateHitbox();
-			add(button);
+			runGroup.add(button);
 		}
 		tabBar = new FlxButton(55, 55, "");
 		tabBar.width = 305;
 		tabBar.height = 20;
 		tabBar.alpha = 0;
 		tabBar.allowSwiping = true;
-		add(tabBar);
+		runGroup.add(tabBar);
 	}
-	var justMousePos = new FlxPoint();
-	var justTaskBarPos = new FlxPoint();
 	var movingTab = false;
 	override function update(elapsed) {
 		super.update(elapsed);
-		if (tabBar.status == 2) {
-			if (FlxG.mouse.justPressed) {justMousePos = FlxG.mouse.getScreenPosition(); justTaskBarPos.set(tab.x, tab.y);movingTab = true;}
-		}
-		if (FlxG.mouse.justReleased) movingTab = false;
+		if (tabBar.status == 2)
+			if (FlxG.mouse.justPressed) movingTab = true;
 		if (movingTab) {
-			tab.setPosition(Math.round(FlxG.mouse.getScreenPosition().x - justMousePos.x) + justTaskBarPos.x, Math.round(FlxG.mouse.getScreenPosition().y - justMousePos.y) + justTaskBarPos.y);
-			for (button in [ok, exit, tabBar]) {
-				var offsetIndex:Map<Dynamic,Dynamic> =  [ok => [120, 183],exit => [285, 6],tabBar => [0, 0]];
-				button.setPosition(tab.x + offsetIndex[button][0], tab.y + offsetIndex[button][1]);
-			}
+			runGroup.x += FlxG.mouse.deltaX;
+			runGroup.y += FlxG.mouse.deltaY;
+			if (FlxG.mouse.justReleased) movingTab = false;
 		}
 	}
 }
@@ -220,7 +223,7 @@ class MusicPlayer extends FlxGroup {
 	var tabBar:FlxButton;
 	var ronmusic:FlxSound;
 	var ronmusicvox:FlxSound;
-	var t = Paths.getSparrowAtlas("windowsUi/so retro");
+	var t = Paths.getSparrowAtlas("menus/desktop/windowsUi/so retro");
 	var tab:FlxSprite;
 	var play:FlxUIButton;
 	var pause:FlxUIButton;
@@ -250,7 +253,7 @@ class MusicPlayer extends FlxGroup {
 			destroy();
 			FlxG.sound.music.volume = 1;
 		});
-		exit.frames = Paths.getSparrowAtlas("windowsUi/run tab");
+		exit.frames = Paths.getSparrowAtlas("menus/desktop/windowsUi/run tab");
 		exit.animation.addByPrefix("normal", "exit neutral");
 		exit.animation.addByPrefix("highlight", "exit neutral");
 		exit.animation.addByPrefix("pressed", "exit pressed");
