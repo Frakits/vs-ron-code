@@ -1,6 +1,7 @@
 
 var rainbowscreen:FlxBackdrop;
 import funkin.options.OptionsMenu;
+import funkin.menus.ModSwitchState;
 import funkin.menus.credits.CreditsMain;
 import flixel.addons.display.FlxBackdrop;
 import flixel.ui.FlxButton;
