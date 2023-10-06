@@ -1,10 +1,8 @@
 <!DOCTYPE codename-engine-character>
-<character y="150" x="-200" camy="-200" camx="-295" isPlayer="false" flipX="false" holdTime="4" sprite="ronPissed" scale="0.5"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
-
-   <anim name="idle" anim="ronPissed idle" loop="false" x="705" y="590"/>
-   <anim name="singLEFT" anim="ronPissed left" loop="false" x="722" y="583"/>
-   <anim name="singDOWN" anim="ronPissed down" loop="false" x="714" y="594"/>
-   <anim name="singUP" anim="ronPissed up" loop="false" x="701" y="597"/>
-   <anim name="singRIGHT" anim="ronPissed right" loop="false" x="693" y="591"/>
-
+<character x="-200" icon="ronslightly" camx="0" y="100" isGF="false" scale="0.5" camy="160" isPlayer="false" sprite="Pissedron">
+	<anim x="0" loop="false" y="0" fps="24" anim="ronIdle" name="idle"/>
+	<anim x="365" loop="false" y="-40" fps="24" anim="ronLeft" name="singLEFT"/>
+	<anim x="5" loop="false" y="-405" fps="24" anim="ronDown" name="singDOWN"/>
+	<anim x="282" loop="false" y="46" fps="24" anim="ronUp" name="singUP"/>
+	<anim x="-85" loop="false" y="-15" fps="24" anim="ronRight" name="singRIGHT"/>
 </character>

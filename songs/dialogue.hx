@@ -8,16 +8,13 @@ import StringTools;
 var didCancel = false;
 if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 	function onStartCountdown(event) {
-		trace("hi");
 		event.cancel();
 	}
 	var spriteGroup = new FlxSpriteGroup();
 	public var dialogueWorks:Bool = true;
 	var music:FlxSound = new FlxSound().loadEmbedded(Paths.music("talking-in-a-cool-way"));
 	public var finishCallback:Void->Void;
-	trace(0);
 	var dialogueJSON:Array = Json.parse(Assets.getText(Paths.file("songs/" + curSong + "/dialogue.json")));
-	trace(0.5);
 	var preloadPortraits = ["bruh" => new FlxSprite()];
 	var curDialogue:Int = 0;
 	var backdropThingy:Dynamic;
@@ -44,20 +41,16 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 		var portraiter = [];
 		var alieasesesae = [];
 		//portrait loading
-		trace(1);
 		for (i=>a in dialogueJSON){
 			if (a.textColor != null && !alieasesesae.contains(a.alias)) {
 				aliases.push([a.alias, a.textColor == "#FFFF00" ? "#FFC800" : a.textColor, ["%","#","^","*"][aliases.length]]); // yellow is unreadable on a white background
 				alieasesesae.push(a.alias);
 			}
-			trace(1.2);
 			if (a.character != null && !portraiter.contains(a.character)) {
 				tempPortrait.push([a.character, a.isLeftSide]);
 				portraiter.push(a.character);
 			}
-			trace(1.3);
 			if (a.retroes != null) {
-				trace(a.retroes);
 				var retroer = new FlxSprite(104 + 147 * i, 668);
 				retroer.frames = Paths.getFrames('dialogue assets/retroIcons');
 				retroer.animation.addByPrefix("idle", a.retroes + "0", 24, true);
@@ -66,9 +59,7 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 				retroer.y -= retroer.height;
 				retroes.push(retroer);
 			}
-			trace(1.8);
 		}
-		trace(2);
 		for (character in tempPortrait)
 		{
 			var char:FlxSprite = new FlxSprite().loadGraphic(Paths.image('dialogue assets/' + character[0]));
@@ -80,10 +71,7 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 			char.scale.set(0.9,0.9);
 			char.origin.set(char.width / 2, char.height);
 			preloadPortraits[character[0]] = char;
-			trace(character[0]);
 		}
-		trace(preloadPortraits);
-		trace(3);
 		//box loading
 		dialoguebox = new FlxSprite().loadGraphic(Paths.image('dialogue assets/window'));
 		preloadBoxes['speech_bubble'] = Paths.image('dialogue assets/window');
@@ -93,14 +81,12 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 		for (a in dialogueJSON)
 			if (a.dialogueBox != null && preloadBoxes[a.dialogueBox] == null)
 				preloadBoxes[a.dialogueBox] = Paths.image('dialogue assets/' + a.dialogueBox);
-		trace(4);
 		bg.alpha = 0;
 		var blackBox = new FlxSprite().makeGraphic(1280, 720, 0xFF000000);
 		FlxTween.tween(bg, {alpha: 0.8}, 1, {startDelay: 1, ease: FlxEase.quintOut, onComplete: function(twn:FlxTween) {nextDialogue(0);		music.play();
 			music.fadeIn(0.5);
 			FlxTween.tween(blackBox, {alpha:0}, 1, {ease: FlxEase.quartOut});
 			music.looped = true;}});
-		trace(5);
 		var textRect = new FlxRect(0, 0, 816, 119);
 		dialogText = new FlxTypeText(385, 543, 810, "", 14);
 		dialogText.font = Paths.font("w95.otf");
@@ -143,17 +129,18 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 		dialoguebox.visible = true;
 		dialogHand.visible = false;
 		curDialogue += e;
-		trace(curDialogue);
 		if (curDialogue == dialogueJSON.length) {
 			STOP = true;
 			music.fadeOut(2,0,function(twn:FlxTween) {
 				music.destroy();
+				finishCallback();
+				remove(spriteGroup);
+				spriteGroup.destroy();
 			});
 			for (d=>i in retroes) FlxTween.tween(i, {alpha:0}, 1, {ease: FlxEase.quintOut});
 			for (d=>i in preloadPortraits) FlxTween.tween(i, {alpha:0}, 1, {ease: FlxEase.quintOut});
 			for (a in [bg, curPortrait, dialoguebox, dialogText, dialogHand, backdropThingy])
-				FlxTween.tween(a, {alpha: 0}, 1, {ease: FlxEase.quintOut, onComplete: function(twn:FlxTween) {trace("Deez"); finishCallback();remove(spriteGroup);spriteGroup.destroy();
-				}});
+				FlxTween.tween(a, {alpha: 0}, 1, {ease: FlxEase.quintOut});
 			return;
 		}
 		var d = dialogueJSON[curDialogue];
@@ -178,7 +165,6 @@ if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
 			dialoguebox.loadGraphic(preloadBoxes[d.dialogueBox]);
 		}
 		targetGoer = d.isLeftSide ? -1 : 1;
-		trace(preloadPortraits[d.character]);
 		if (d.character != null && curPortrait != preloadPortraits[d.character]) {
 			curPortrait = preloadPortraits[d.character];
 			FlxTween.completeTweensOf(curPortrait);

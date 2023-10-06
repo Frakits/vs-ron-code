@@ -25,6 +25,7 @@ var window:FlxSprite;
 var ywindow:Float = FlxG.height/2-203;
 var tweening:Bool = false;
 function create() {
+	CoolUtil.playMenuSong();
 	var iconI:Int = 0;
 	var iconFrames = Paths.getFrames("menus/desktop/menuIcons");
 	var sanstitre = new FlxBackdrop(Paths.image('menus/desktop/sanstitre'), FlxAxes.XY, 0, 0);
@@ -100,6 +101,21 @@ function create() {
 	}
 }
 function update(elapsed:Float) {
+	if (FlxG.sound.music.volume < 0.8)
+		FlxG.sound.music.volume += 0.5 * elapsed;
+	if (FlxG.keys.justPressed.SEVEN) {
+		persistentUpdate = false;
+		persistentDraw = true;
+		import funkin.editors.EditorPicker;
+		openSubState(new EditorPicker());
+	}
+
+	if (controls.SWITCHMOD) {
+		openSubState(new ModSwitchMenu());
+		persistentUpdate = false;
+		persistentDraw = true;
+	}
+
 	FlxG.mouse.visible = true;
 	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) new Winver();
 }

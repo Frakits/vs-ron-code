@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character x="20" icon="rongd" y="350" isGF="false" flipX="false" isPlayer="false" sprite="ronGeometrydash">
+	<anim x="-5" loop="false" y="0" fps="24" anim="ronidle instance 1" name="idle"/>
+	<anim x="-29" loop="false" y="27" fps="24" anim="ronup instance 1" name="singUP"/>
+	<anim x="-2" loop="false" y="-11" fps="24" anim="ronleft instance 1" name="singLEFT"/>
+	<anim x="-43" loop="false" y="-12" fps="24" anim="ronright instance 1" name="singRIGHT"/>
+	<anim x="-10" loop="false" y="-26" fps="24" anim="rondown instance 1" name="singDOWN"/>
+</character>

@@ -12,7 +12,7 @@ function postCreate() {
 	cameraFollow.visible = false;
 	cameraFollow.setPosition(camFollow.x, camFollow.y);
 	FlxG.camera.follow(cameraFollow);
-	FlxG.game.addShader(new CustomShader("NVIDIA RTX Architecture"));
+	//FlxG.game.addShader(new CustomShader("NVIDIA RTX Architecture"));
 }
 
 var trauma = 0;
