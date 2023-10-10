@@ -2,6 +2,7 @@ ron
 wasted
 ayo
 bloodshed
+trojan-virus
 
 ron-classic
 wasted-classic

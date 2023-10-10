@@ -57,6 +57,7 @@ function updatePost60(elapsed) {
 	cameraFollow.acceleration.set(((camFollow.x - cameraFollow.x) - (cameraFollow.velocity.x * speedIthink)) / realSpeed, ((camFollow.y - cameraFollow.y) - (cameraFollow.velocity.y * speedIthink)) / realSpeed); // so much smoothness
 
 	for (i in zoomTweens) i.active = !paused;
+	chartingMode = true;
 }
 function setDriftAmount(value:Float) {driftAmount = value;}
 

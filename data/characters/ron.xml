@@ -1,9 +1,10 @@
 <!DOCTYPE codename-engine-character>
-<character x="-800"  y="-300" camx="-317" camy="179" scale="0.5" isPlayer="false" flipX="false" holdTime="4" sprite="ron">
-   <anim x="0" loop="true" y="0" fps="12" anim="ron idle" name="idle"/>
-   <anim x="0" loop="false" y="0" fps="8" anim="ron left" name="singLEFT"/>
-   <anim x="0" loop="false" y="0" fps="12" anim="ron down" name="singDOWN"/>
-   <anim x="0" loop="false" y="0" fps="12" anim="ron up" name="singUP"/>
-   <anim x="0" loop="false" y="0" fps="12" anim="ron right" name="singRIGHT"/>
-   <anim x="0" loop="false" y="0" fps="16" anim="ron death" name="hey"/>
+<character x="-800" icon="ron" camx="-317" y="-300" isGF="false" scale="0.5" camy="179" isPlayer="false" sprite="ron">
+	<anim x="0" loop="true" y="0" fps="12" anim="ron idle" name="idle"/>
+	<anim x="0" loop="false" y="0" fps="8" anim="ron left" name="singLEFT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="ron down" name="singDOWN"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="ron up" name="singUP"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="ron right" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="16" anim="ron death" name="hey"/>
+	<anim x="-240" loop="false" y="-355" fps="8" anim="classic" name="classic"/>
 </character>

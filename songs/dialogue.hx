@@ -6,7 +6,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText.FlxTextFormatMarkerPair;
 import StringTools;
 var didCancel = false;
-if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json"))) {
+if (Assets.exists(Paths.file("songs/" + curSong + "/dialogue.json")) && state.isStoryMode) {
 	function onStartCountdown(event) {
 		event.cancel();
 	}

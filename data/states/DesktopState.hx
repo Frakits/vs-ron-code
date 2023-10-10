@@ -5,7 +5,6 @@ import funkin.menus.ModSwitchMenu;
 import funkin.menus.credits.CreditsMain;
 import flixel.addons.display.FlxBackdrop;
 import flixel.ui.FlxButton;
-trace("hi");
 var icons:Map<String, Dynamic> = [
 	"discord" => "https://discord.gg/ron-874366610918473748",
 	"random" => "https://www.facebook.com",
@@ -26,6 +25,7 @@ var window:FlxSprite;
 var ywindow:Float = FlxG.height/2-203;
 var tweening:Bool = false;
 function create() {
+	if (FlxG.save.data.rtx == null) FlxG.save.data.rtx = false;
 	CoolUtil.playMenuSong();
 	var iconI:Int = 0;
 	var iconFrames = Paths.getFrames("menus/desktop/menuIcons");
@@ -118,34 +118,35 @@ function update(elapsed:Float) {
 	}
 
 	FlxG.mouse.visible = true;
-	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) new Winver();
+	if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.R) add(new RunTab());
 }
 import flixel.group.FlxSpriteGroup;
+import flixel.addons.ui.FlxInputText;
 class RunTab extends flixel.FlxBasic {
+	public var rtx = new CustomShader("NVIDIA RTX Architecture");
 	public var runGroup:FlxSpriteGroup;
 	public var tab:FlxSprite;
 	public var ok:FlxButton;
 	public var cancel:FlxButton;
 	public var exit:FlxButton;
 	public var help:FlxButton;
-	//var field:FlxUIInputText;
+	public var field:FlxInputText;
 	public var tabBar:FlxButton;
 	var t = Paths.getSparrowAtlas("menus/desktop/windowsUi/run tab");
-	var justMousePos = new FlxPoint();
-	var justTaskBarPos = new FlxPoint();
-	var movingTab = false;
+	public var movingTab = false;
 	public function new() {
 		super();
-		//field = new FlxUIInputText(58, 643, 270, "", 18);
-		//field.font = Paths.font("w95.otf");
-		//field.callback = function(text, action) {
-		//	if (action == "enter") {
-		//		triggerRunEvent(field.text);
-		//		destroy();
-		//	}
-		//}
-		//add(field);
+		field = new FlxInputText(58, 643, 270, "", 18);
+		field.font = Paths.font("w95.otf");
+		field.callback = function(text, action) {
+			if (action == "input") FlxG.sound.keysAllowed = false;
+			if (action == "enter") {
+				triggerRunEvent(field.text);
+				destroy();
+			}
+		}
 		runGroup = new FlxSpriteGroup();
+		runGroup.add(field);
 		FlxG.state.add(runGroup);
 		tab = new FlxSprite(0, 560);
 		tab.frames = t;
@@ -153,10 +154,11 @@ class RunTab extends flixel.FlxBasic {
 		tab.animation.play("d");
 		runGroup.add(tab); //270 text field length
 		ok = new FlxButton(177, 685, "", function() {
-			//triggerRunEvent(field.text);
+			triggerRunEvent(field.text);
 			runGroup.destroy();
 		});
 		cancel = new FlxButton(258, 685, "", function() {
+			FlxG.sound.keysAllowed = true;
 			runGroup.destroy();
 		});
 		help = new FlxButton(308, 566, "", function() {
@@ -189,6 +191,19 @@ class RunTab extends flixel.FlxBasic {
 			runGroup.x += FlxG.mouse.deltaX;
 			runGroup.y += FlxG.mouse.deltaY;
 			if (FlxG.mouse.justReleased) movingTab = false;
+		}
+	}
+	public function triggerRunEvent(runText) {
+		FlxG.sound.keysAllowed = true;
+		switch (runText) {
+			case "teevee": CoolUtil.browserLoad("https://youtu.be/X9hIJDzo9m0");
+			case "full" | "full version" | "2.5" | "3.0" | "demo 3" | "next demo": CoolUtil.openURL("https://youtu.be/pNzGTCEmf3U");
+			case "2012": 
+				rainbowscreen.visible = false;
+				FlxG.sound.play(Paths.sound('vine'));
+			case "winver": FlxG.state.add(new Winver());
+			case "passionatedevs": FlxG.game.addShader(rtx);
+			default: if (runText.contains("www") || runText.contains("http") || runText.contains("com")) CoolUtil.openURL(runText);
 		}
 	}
 }
@@ -234,169 +249,5 @@ class Winver extends flixel.FlxBasic {
 			runGroup.y += FlxG.mouse.deltaY;
 			if (FlxG.mouse.justReleased) movingTab = false;
 		}
-	}
-}
-class MusicPlayer extends FlxGroup {
-	var tabBar:FlxButton;
-	var ronmusic:FlxSound;
-	var ronmusicvox:FlxSound;
-	var t = Paths.getSparrowAtlas("menus/desktop/windowsUi/so retro");
-	var tab:FlxSprite;
-	var play:FlxUIButton;
-	var pause:FlxUIButton;
-	var voices:FlxUIButton;
-	var timer:FlxText;
-	var militimer:FlxText;
-	var dropDown:FlxUIDropDownMenu;
-	var backward:FlxButton;
-	var forward:FlxButton;
-	var exit:FlxButton;
-	public function new() {
-		super();
-		ronmusic = new FlxSound();
-		ronmusic.loadEmbedded(Paths.inst("bleeding"));
-		ronmusic.onComplete = function() {play.toggled = false;}
-		FlxG.sound.list.add(ronmusic);
-		ronmusicvox = new FlxSound();
-		ronmusicvox.loadEmbedded(Paths.voices("bleeding"));
-		FlxG.sound.list.add(ronmusicvox);
-		ronmusicvox.volume = 0;
-		tab = new FlxSprite(250, 100);
-		tab.frames = t;
-		tab.animation.addByPrefix("t", "tab");
-		tab.animation.play("t");
-		add(tab);
-		exit = new FlxButton(tab.x + 283, tab.y + 5, "", function() {
-			destroy();
-			FlxG.sound.music.volume = 1;
-		});
-		exit.frames = Paths.getSparrowAtlas("menus/desktop/windowsUi/run tab");
-		exit.animation.addByPrefix("normal", "exit neutral");
-		exit.animation.addByPrefix("highlight", "exit neutral");
-		exit.animation.addByPrefix("pressed", "exit pressed");
-		add(exit);
-		timer = new FlxText(tab.x + 61, tab.y + 38, 0, "NO SONG PLAYING", 23);
-		timer.color = 0xFF808000;
-		timer.antialiasing = false;
-		add(timer);
-		militimer = new FlxText(tab.x + 17, tab.y + 38, 0, "NO SONG PLAYING", 23);
-		militimer.color = 0xFF808000;
-		militimer.antialiasing = false;
-		add(militimer);
-		backward = new FlxButton(tab.x + 175, tab.y + 54, function() {
-			if (ronmusic.playing) ronmusic.time -= 3000;
-		});
-		forward = new FlxButton(tab.x + 199, tab.y + 54, function() {
-			if (ronmusic.playing) {
-				if (ronmusic.time + 3000 > ronmusic.length) ronmusic.stop();
-				else ronmusic.time += 3000;
-			}
-				
-		});
-		play = new FlxUIButton(tab.x + 175, tab.y + 27, function() {
-			if (play.toggled) {
-				if (pause.toggled) {
-					pause.toggled = false;
-					ronmusic.resume();
-					ronmusicvox.resume();
-				}
-				else {ronmusic.play(); ronmusicvox.play();}
-			}
-			if (!play.toggled) {
-				ronmusic.stop();
-				ronmusicvox.stop();
-			}
-		});
-		play.has_toggle = true;
-		pause = new FlxUIButton(tab.x + 223, tab.y + 27, function() {
-			if (pause.toggled) {
-				play.toggled = false;
-				ronmusic.pause();
-				ronmusicvox.pause();
-			}
-			if (!pause.toggled) {
-				play.toggled = true;
-				ronmusic.resume();
-				ronmusicvox.resume();
-			}
-		});
-		pause.has_toggle = true;
-		voices = new FlxUIButton(tab.x + 247, tab.y + 27);
-		voices.has_toggle = true;
-		for (i=>button in [backward=>"backwards", forward=>"forward", pause=>"pause", voices=>"voice", play=>"play"]) {
-			i.frames = t;
-			i.animation.addByPrefix("normal", button + " neutral");
-			i.animation.addByPrefix("highlight", button + " neutral");
-			i.animation.addByPrefix("pressed", button + " pressed");
-			i.updateHitbox();
-			add(i);
-		}
-		for (i=>j in [pause=>"pause", voices=>"voice", play=>"play"]) {
-			i.animation.addByPrefix("normal_toggled", j + " pressed");
-			i.animation.addByPrefix("highlight_toggled", j + " pressed");
-			i.animation.addByPrefix("pressed_toggled", j + " pressed");
-		}
-		var header = new FlxUIDropDownHeader(244, new FlxSprite().makeGraphic(244, 16));
-		//header.background = new FlxSprite().makeGraphic(244, 12);
-		header.button.frames = t;
-		header.button.animation.addByPrefix("normal", "select neutral");
-		header.button.animation.addByPrefix("highlight", "select neutral");
-		header.button.animation.addByPrefix("pressed", "select pressed");
-		header.button.updateHitbox();
-		header.button.label.offset.x += 50325;
-		header.button.offset.x -= 244 - header.button.width;
-		header.button.width = 244;
-		header.text.y -= 3;
-		header.text.font = Paths.font("w95.otf");
-		header.text.size = 14;
-		header.text.antialiasing = false;
-		//header.background.setGraphicSize(244, 16);
-		header.button.offset.x -= 10;
-		dropDown = new FlxUIDropDownMenu(tab.x + 47, tab.y + 135, FlxUIDropDownMenu.makeStrIdLabelArray(sys.FileSystem.readDirectory("assets/songs")), function(song) {
-			ronmusic.stop();
-			ronmusicvox.stop();
-			ronmusicvox.loadEmbedded(Paths.voices(song));
-			ronmusic.loadEmbedded(Paths.inst(song));
-			pause.toggled = false;
-			play.toggled = false;
-		}, header);
-		dropDown.dropDirection = FlxUIDropDownMenuDropDirection.Down;
-		dropDown.selectedLabel = "";
-		for (i in dropDown.list) {
-			i.label.font = Paths.font("w95.otf");
-			i.label.size = 14;
-			i.label.antialiasing = false;
-		}
-		add(dropDown);
-		play.width = 47;
-		tabBar = new FlxButton(250, 250, "");
-		tabBar.width = 303;
-		tabBar.height = 20;
-		tabBar.alpha = 0;
-		tabBar.allowSwiping = true;
-		add(tabBar);
-	}
-	var justMousePos = new FlxPoint();
-	var justTaskBarPos = new FlxPoint();
-	var movingTab = false;
-	override function update(elapsed) {
-		super.update(elapsed);
-		if (tabBar.status == 2) {
-			if (FlxG.mouse.justPressed) {justMousePos = FlxG.mouse.getScreenPosition(); justTaskBarPos.set(tab.x, tab.y);movingTab = true;}
-		}
-		if (FlxG.mouse.justReleased) movingTab = false;
-		ronmusicvox.time = ronmusic.time;
-		var timey:Float = ronmusic.time;
-		militimer.text = '['+(Math.floor(timey /100)%10 == 0 && Math.floor(timey /100) > 5 ? "1" : "0")+Math.floor(timey /100) % 10;
-		timer.text = "] " + (Math.floor((timey /100000) * 1.6666) < 10 ? "0" : "")+Math.floor((timey /100000) * 1.6666) + (Math.floor((timey/1000) % 60) < 10 ? ":0" : ":")+Math.floor((timey /1000) % 60);
-		if (movingTab) {
-			tab.setPosition(Math.round(FlxG.mouse.getScreenPosition().x - justMousePos.x) + justTaskBarPos.x, Math.round(FlxG.mouse.getScreenPosition().y - justMousePos.y) + justTaskBarPos.y);
-			tabBar.setPosition(tab.x, tab.y);
-			for (button=>i in [backward=>"backwards", forward=>"forward", pause=>"pause", voices=>"voice", play=>"play", timer=>"timer", militimer=>"militimer", dropDown=>"dropdown", exit=>"exit"]) {
-				var offsets = ["backwards"=>[175, 54], "forward"=>[199, 54], "pause"=>[223, 27], "voice"=>[247, 27], "play"=>[175, 27], "timer"=>[61, 38], "militimer"=>[17, 38], "dropdown"=>[47, 135], "exit"=>[283, 5]];
-				button.setPosition(tab.x + offsets[i][0], tab.y + offsets[i][1]);
-			}
-		}
-		ronmusicvox.volume = voices.toggled ? 1 : 0;
 	}
 }
