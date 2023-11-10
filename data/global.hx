@@ -7,7 +7,7 @@ import flixel.FlxG;
 import Type;
 function update() {
     FlxG.autoPause = false;
-    Main.framerateSprite.codenameBuildField.text = "REAL Memory Counter: " + 0 + "GB\nThe REAL Psych Engine 0.7";
+    Main.framerateSprite.codenameBuildField.text = "REAL Memory Counter: " + 0 + "GB\nThe REAL FL Studio 21.1.1.3750";
 }
 //var freindly = FlxGraphic.fromAssetKey(Paths.image("Counter-Strike Global Offensive"));
 //freindly.persist = true;

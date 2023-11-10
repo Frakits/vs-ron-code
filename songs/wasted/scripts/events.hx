@@ -1,5 +1,6 @@
 var fog:FlxSprite;
 var truefog:FlxSprite;
+
 function postCreate() {
 	fog = new FlxSprite().loadGraphic(Paths.image('stages/pissedStreet/fog'));
 	fog.scale.set(2, 2);
@@ -14,15 +15,47 @@ function postCreate() {
 	truefog.visible = false;
 }
 function beatHit(curBeat) {
+	if ((curBeat >= 129) && (curBeat < 233))
+	{
+		for (i in 0...4)
+		{ 
+			for (guh in [playerStrums, cpuStrums])
+			{
+				var member = guh.members[i];
+								
+				if (curBeat % 2 == 0)
+				{
+					var angler = (i%2 ? 10 : -10) * ((curBeat%4==2) ? -1 : 1);
+
+					FlxTween.tween(member, {angle: angler, y: member.y + (PlayState.downscroll ? 10 : -10)}, 0.125, {
+							ease: FlxEase.quartIn,
+							onComplete: function(twn:FlxTween)
+							{
+								FlxTween.tween(member, {angle: 0, y: member.y - (PlayState.downscroll ? 10 : -10)}, 0.33, {ease: FlxEase.circInOut});
+							}
+						});
+				}
+			}
+		}
+	}
 	switch(curBeat) {
+		case 124: 
+			var it = 0; for (i in stage.stageSprites) {
+				FlxTween.color(i, (Conductor.crochet/1000) * 4.5,0xFFFFFFFF, 0xFF000000);
+			}
+			FlxTween.cancelTweensOf(FlxG.camera, ['zoom']);
+			FlxTween.tween(FlxG.camera, {zoom: 1.1}, Conductor.crochet / 1000 * 5, {ease: FlxEase.circIn, onUpdate: function(value) {defaultCamZoom = 0.8;}});
 		case 129: 
 			truefog.visible = true;
 			add(fog);
 			fog.color = 0xFF77ADFF;
-			FlxG.camera.flash(0xFFFFFFFF, 1, null, true);
+			FlxG.camera.flash(0xFF000000, 1, null, true);
 			dad.color = 0xFF000000;
 			boyfriend.color = 0xFF000000;
 			gf.color = 0xFF000000;
+			truefog.color = 0xFFFFFFFF;
+			stage.getSprite("sky").color = 0xFFFFFFFF;
+			stage.getSprite("city").color = 0xFFFFFFFF;
 			stage.getSprite("mountains").color = 0xFF000000;
 			stage.getSprite("hillfront").color = 0xFF000000;
 			stage.getSprite("street").color = 0xFF000000;
@@ -33,12 +66,14 @@ function beatHit(curBeat) {
 		case 233:
 			truefog.visible = false;
 			remove(fog);
-			dad.color = 
-			boyfriend.color = 
-			gf.color = 
-			stage.getSprite("mountains").color = 
-			stage.getSprite("hillfront").color = 
-			stage.getSprite("street").color = 0xFFFFFFFF;
+			var it = 0; 
+			for (i in stage.stageSprites) {
+				if (i.color == 0xFF000000)
+					FlxTween.color(i, (Conductor.crochet/2000), 0xFF000000, 0xFFFFFFFF, {ease: FlxEase.circOut});
+			}
+			for (i in [dad, gf, boyfriend])
+				FlxTween.color(i, (Conductor.crochet/2000), 0xFF000000, 0xFFFFFFFF, {ease: FlxEase.circOut});
+
 			stage.getSprite("street").alpha = 
 			stage.getSprite("hillfront").alpha = 
 			stage.getSprite("mountains").alpha = 
