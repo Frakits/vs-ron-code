@@ -1,8 +1,6 @@
 {
-    "displayName": "Rong Aisle",
-    "bpm": 150.0,
-    "icon": "dvd_ron",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "rong-aisle",
+	"bpm": 160.0,
+	"icon": "rondvd",
+	"color": "#F6B604"
 }

@@ -1,8 +1,8 @@
 COMPOSER(s)
-Fearless
+Ezzy
 
 CHARTER(s)
-Seezee
+SpaceVeta
 
 ARTIST(s)
-Byok
+BYOK

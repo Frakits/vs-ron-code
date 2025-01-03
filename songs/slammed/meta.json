@@ -1,8 +1,6 @@
 {
-    "displayName": "Slammed",
-    "bpm": 200.0,
-    "icon": "bambi",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "slammed",
+	"bpm": 150.0,
+	"icon": "bambi",
+	"color": "#5DDF03"
 }

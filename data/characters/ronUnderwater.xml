@@ -1,10 +1,9 @@
 <!DOCTYPE codename-engine-character>
-<character isPlayer="false" flipX="false" holdTime="4" sprite="ronUnderwater" scale="1.1"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
-
-   <anim name="singLEFT" anim="left" loop="false" x="140" y="-40"/>
-   <anim name="singDOWN" anim="down" loop="false" x="-30" y="-90"/>
-   <anim name="singUP" anim="up" loop="false" x="-20" y="50"/>
-   <anim name="singRIGHT" anim="right" loop="false" x="-45" y="-45"/>
-   <anim name="idle" anim="idle" loop="false" x="0" y="0"/>
-
+<!-- Made with WizardMantis's Character Converter on https://codename-engine.com/ -->
+<character sprite="newcharstest/ronUnderwater" icon="ronslightly" color="#aa8900" x="-120" y="220" camx="30" scale="1.1">
+	<anim name="singLEFT" anim="left" x="127.27272727272727" y="-36.36363636363636"/>
+	<anim name="singDOWN" anim="down" x="-27.27272727272727" y="-81.81818181818181"/>
+	<anim name="singUP" anim="up" x="-18.18181818181818" y="45.45454545454545"/>
+	<anim name="singRIGHT" anim="right" x="-40.90909090909091" y="-40.90909090909091"/>
+	<anim name="idle" anim="idle"/>
 </character>

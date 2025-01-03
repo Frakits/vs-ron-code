@@ -1,8 +1,6 @@
 {
-    "displayName": "Ayo Classic",
-    "bpm": 190.0,
-    "icon": "dad",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "Ayo-classic",
+	"bpm": 190.0,
+	"icon": "ronmad-classic",
+	"color": "#F6B604"
 }

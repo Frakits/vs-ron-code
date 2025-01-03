@@ -1,8 +1,6 @@
 {
-    "displayName": "Ayo",
-    "bpm": 150.0,
-    "icon": "ronmad",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "ayo",
+	"bpm": 150.0,
+	"icon": "ronmad",
+	"color": "#F6B604"
 }

@@ -1,8 +1,0 @@
-<!DOCTYPE codename-engine-character>
-<character isPlayer="false" flipX="false" holdTime="4" icon="demonron" sprite="bloodshitron" scale="1.2" antialiasing="false"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
-   <anim name="idle" anim="eye idle" loop="false" x="0" y="0"/>
-   <anim name="singUP" anim="eye up" loop="false" x="0" y="0"/>
-   <anim name="singRIGHT" anim="eye right" loop="false" x="0" y="0"/>
-   <anim name="singLEFT" anim="eye left" loop="false" x="0" y="0"/>
-   <anim name="singDOWN" anim="eye down" loop="false" x="0" y="0"/>
-</character>

@@ -1,8 +1,6 @@
 {
-    "displayName": "Awesome Ron",
-    "bpm": 142.0,
-    "icon": "awesome-ron",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "awesome-ron",
+	"bpm": 142.0,
+	"icon": "awesome-ron",
+	"color": "#F6B604"
 }

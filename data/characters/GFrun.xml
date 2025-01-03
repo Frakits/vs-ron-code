@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character isPlayer="false" isGF="true" flipX="false" holdTime="4" sprite="GF_ass_sets"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
+<character isPlayer="false"icon="gf" isGF="true" flipX="false" holdTime="4" sprite="GF_ass_sets"> <!-- CONVERTED VIA psychjsontocodenamexml.py by Burgerballs -->
 
    <anim name="cheer" anim="GF Cheer" loop="false" x="3" y="0"/>
    <anim name="singLEFT" anim="GF left note" loop="false" x="0" y="-19"/>

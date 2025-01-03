@@ -1,8 +1,6 @@
 {
-    "displayName": "Ron Classic",
-    "bpm": 186.0,
-    "icon": "ron_classic",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "ron-classic",
+	"bpm": 180.0,
+	"icon": "ron-classic",
+	"color": "#fbff0b"
 }

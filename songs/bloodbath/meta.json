@@ -1,8 +1,6 @@
 {
-    "displayName": "Bloodbath",
-    "bpm": 120.0,
-    "icon": "demonron",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "Bloodbath",
+	"bpm": 170.0,
+	"icon": "demonron",
+	"color": "#7B1313"
 }

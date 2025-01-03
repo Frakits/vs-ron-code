@@ -5,6 +5,24 @@ import funkin.backend.scripting.ModState;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import Type;
+function new()
+{   
+
+    if (FlxG.save.data.glitch == null) FlxG.save.data.glitch = true;
+    if (FlxG.save.data.chrom == null) FlxG.save.data.chrom = true;
+    if (FlxG.save.data.mosaic == null) FlxG.save.data.mosaic = true;
+    if (FlxG.save.data.crt == null) FlxG.save.data.crt = true;
+    if (FlxG.save.data.colour == null) FlxG.save.data.colour = true;
+    //if (FlxG.save.data.saturation == null) FlxG.save.data.saturation = true;
+    //if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
+    if (FlxG.save.data.vhs == null) FlxG.save.data.vhs = true;
+    if (FlxG.save.data.rain == null) FlxG.save.data.rain = true;
+    
+    if (FlxG.save.data.pussy == null) FlxG.save.data.pussy = true;
+    if (FlxG.save.data.warning == null) FlxG.save.data.warning = true;
+    if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
+    
+    }
 function update() {
     FlxG.autoPause = false;
     Main.framerateSprite.codenameBuildField.text = "REAL Memory Counter: " + 0 + "GB\nThe REAL FL Studio 21.1.1.3750";
@@ -27,6 +45,8 @@ function update() {
 //        i.updateHitbox();
 //    }
 //}
+WindowUtils.winTitle = "versus literly every fanmade mod ever";
+window.setIcon(Image.fromBytes(Assets.getBytes(Paths.image('icon'))));
 var redirectStates:Map<FlxState, String> = [
     MainMenuState => "DesktopState", 
 ];

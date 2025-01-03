@@ -1,12 +1,12 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="gbf" y="350" isGF="false" flipX="true" isPlayer="true" sprite="grayBoy">
-	<anim x="-5" loop="false" y="0" fps="24" anim="idle" name="idle"/>
-	<anim x="-439" loop="false" y="232" fps="24" anim="up" name="singUP"/>
-	<anim x="197" loop="false" y="-71" fps="24" anim="left" name="singLEFT"/>
-	<anim x="-408" loop="false" y="-12" fps="24" anim="right" name="singRIGHT"/>
-	<anim x="-285" loop="false" y="5" fps="24" anim="down" name="singDOWN"/>
-	<anim x="-29" loop="false" y="27" fps="24" anim="miss" name="singUPmiss"/>
-	<anim x="12" loop="false" y="24" fps="24" anim="miss" name="singLEFTmiss"/>
-	<anim x="-30" loop="false" y="21" fps="24" anim="miss" name="singRIGHTmiss"/>
-	<anim x="-11" loop="false" y="-19" fps="24" anim="miss" name="singDOWNmiss"/>
+<character y="350" sprite="grayBoy" flipX="true" isPlayer="true" icon="gbf" color="#000000" isGF="false">
+	<anim name="idle" anim="idle" x="-5" y="0" fps="24" loop="false"/>
+	<anim name="singUP" anim="up" x="-439" y="232" fps="24" loop="false"/>
+	<anim name="singLEFT" anim="left" x="197" y="-71" fps="24" loop="false"/>
+	<anim name="singRIGHT" anim="right" x="-408" y="-12" fps="24" loop="false"/>
+	<anim name="singDOWN" anim="down" x="-285" y="5" fps="24" loop="false"/>
+	<anim name="singUPmiss" anim="miss" x="-29" y="27" fps="24" loop="false"/>
+	<anim name="singLEFTmiss" anim="miss" x="12" y="24" fps="24" loop="false"/>
+	<anim name="singRIGHTmiss" anim="miss" x="-30" y="21" fps="24" loop="false"/>
+	<anim name="singDOWNmiss" anim="miss" x="-11" y="-19" fps="24" loop="false"/>
 </character>

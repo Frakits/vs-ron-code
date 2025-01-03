@@ -1,8 +1,6 @@
 {
-    "displayName": "Certified Champion",
-    "bpm": 150.0,
-    "icon": "shuttle-man",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "certified-champion",
+	"bpm": 190.0,
+	"icon": "shittle",
+	"color": "#F6B604"
 }

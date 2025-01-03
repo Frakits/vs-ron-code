@@ -1,8 +1,6 @@
 {
-    "displayName": "Tutorial",
-    "bpm": 100.0,
-    "icon": "gf",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "tutorial",
+	"bpm": 185.0,
+	"icon": "gf",
+	"color": "#F6B604"
 }

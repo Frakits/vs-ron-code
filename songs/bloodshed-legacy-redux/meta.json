@@ -1,8 +1,6 @@
 {
-    "displayName": "Bloodsheed Legacy Redux",
-    "bpm": 120.0,
-    "icon": "dad",
-    "color": "#9271FD",
-    "coopAllowed": true,
-    "opponentModeAllowed": true
+	"displayName": "Bloodshed-legacy-redux",
+	"bpm": 142.0,
+	"icon": "hahanotscary",
+	"color": "#a20b02"
 }
