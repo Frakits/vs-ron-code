@@ -1,8 +1,10 @@
 import funkin.editors.ui.UIState;
+import funkin.backend.utils.WindowUtils;
 import funkin.backend.system.Main;
 import funkin.menus.MainMenuState;
 import funkin.backend.scripting.ModState;
 import flixel.graphics.FlxGraphic;
+import lime.graphics.Image;
 import flixel.FlxG;
 import Type;
 function new()
