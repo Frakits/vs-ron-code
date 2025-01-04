@@ -1,4 +1,6 @@
 import flixel.graphics.FlxGraphic;
+import flixel.effects.particles.FlxParticle;
+import flixel.effects.particles.FlxTypedEmitter;
 var camText:FlxCamera = new FlxCamera();
 var portrait:FlxSprite;
 var preload = [];
@@ -50,6 +52,36 @@ function postCreate() {
 		preload.push(graphic);
 	}
 	changeSelection(0, true);
+	var coolemitter:FlxTypedEmitter = new FlxTypedEmitter();
+	coolemitter.width = FlxG.width*1.5;
+	coolemitter.velocity.set(0, -5, 0, -10);
+	coolemitter.angularVelocity.set(-10, 10);
+	coolemitter.lifespan.set(5);
+	coolemitter.y = FlxG.height;
+
+	var coolzemitter:FlxTypedEmitter = new FlxTypedEmitter();
+	coolzemitter.width = FlxG.width*1.5;
+	coolzemitter.velocity.set(0, 5, 0, 10);
+	coolzemitter.angularVelocity.set(-10, 10);
+	coolzemitter.lifespan.set(5);
+
+	for (i in 0...150)
+	{
+		var p = new FlxParticle();
+		var p2 = new FlxParticle();
+		p.makeGraphic(6,6,FlxColor.BLACK);
+		p2.makeGraphic(12,12,FlxColor.BLACK);
+
+		coolemitter.add(p);
+		coolemitter.add(p2);
+		coolzemitter.add(p);
+		coolzemitter.add(p2);
+	}
+
+	add(coolzemitter);
+	coolzemitter.start(false, 0.05);
+	add(coolemitter);
+	coolemitter.start(false, 0.05);
 }
 function onChangeSelection(event) {
 	if (event.change == 0) event.playMenuSFX = false;
