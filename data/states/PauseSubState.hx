@@ -24,9 +24,15 @@ var curSelected = 0;
 var optionButtons = [];
 var pauseMusic:FlxSound;
 var bit:CustomShader  = new CustomShader("8bitcolor");
+var camPause:FlxCamera;
 override function create() {
     parentDisabler = new FunkinParentDisabler();
 	add(parentDisabler);
+
+	camPause = new FlxCamera();
+	camPause.bgColor = 0x00000000;
+	FlxG.cameras.add(camPause, false);
+	FlxTween.cancelTweensOf(camPause);
     
 	pauseMusic = FlxG.sound.load(Paths.music('breakfast'), 0, true);
 	pauseMusic.persist = false;

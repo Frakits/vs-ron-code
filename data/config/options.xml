@@ -1,8 +1,9 @@
 <!DOCTYPE codename-mod-options>
 <menu name="ron Options" desc="shader_shit">
-			<checkbox id="glitch" name="Glitch Shaders" desc="Enable/Disable Glitch Shaders." />
-			<checkbox id="chrom" name="chromatic aberration" desc="Enable/Disable chromatic aberration Shaders." />
+<checkbox id="glitch" name="Glitch Shaders" desc="Enable/Disable Glitch Shaders." />
+<checkbox id="chrom" name="chromatic aberration" desc="Enable/Disable chromatic aberration Shaders." />
  <checkbox id="mosaic" name="mosaic Shader" desc="Enable/Disable mosaic Shader. (ONLY_USED_IN_PRETTY-WACKY)" /> 
+<number id="chromeOffset" name="rgbintense" min="0.5" max="2" change="0.1"/>
  <checkbox id="crt" name="CRT Shader" desc="fake_CRT_shader" />
  <checkbox id="colour" name="8bitcolor" desc="8bitcolor_shader" />
  <!-- <checkbox id="saturation" name="Saturation Shaders" desc="Enable/Disable Saturation Shaders. (low/no intensive)" />

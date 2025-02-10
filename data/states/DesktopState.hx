@@ -5,6 +5,10 @@ import funkin.menus.ModSwitchMenu;
 import funkin.menus.credits.CreditsMain;
 import flixel.addons.display.FlxBackdrop;
 import flixel.ui.FlxButton;
+var crt:CustomShader  = new CustomShader("fake CRT");
+var bit:CustomShader  = new CustomShader("8bitcolor");
+var chrom:CustomShader  = new CustomShader("chromatic aberration");
+var chromeOffset = (FlxG.save.data.chromeOffset/350);
 var icons:Map<String, Dynamic> = [
 	"discord" => "https://discord.gg/ron-874366610918473748",
 	"random" => "https://www.facebook.com",
@@ -41,6 +45,14 @@ function create() {
 	add(sanstitre);
 	add(rainbowscreen);
 	add(new FlxSprite().loadGraphic(Paths.image("menus/desktop/pcBg")));
+	if (FlxG.save.data.crt){FlxG.camera.addShader(crt);}
+	if (FlxG.save.data.colour) {FlxG.camera.addShader(bit);
+	bit.data.enablethisbitch.value = [1.];}
+	if (FlxG.save.data.chrom) {FlxG.camera.addShader(chrom);
+		chrom.data.rOffset.value = [chromeOffset /2];
+		chrom.data.gOffset.value = [0.0];
+		chrom.data.bOffset.value = [chromeOffset  * -1];
+	}
 	
 	window = new FlxSprite(FlxG.width/1.3-405,ywindow);
 	window.frames = Paths.getSparrowAtlas('menus/desktop/menuCarNew');
@@ -65,18 +77,34 @@ function create() {
 				button.color = 0xFF485EC2;
 				if (clickAmounts == 2) {
 					if (icons[i] == "story mode is idiot") {
-						if (transitioningStory) {return;}
-						transitioningStory = true;
-						//StoryMenuState.musicTime = FlxG.sound.music.time;
-						//new StoryMenuState();
-						//transitioningToIdiotism = true;
-						//rainbTmr.cancel();
-						//new FlxTimer().start(1.5, function(tmr:FlxTimer){
-						//	FlxG.camera.fade(0x88FFFFFF, 0.6, false);
-						//	new FlxTimer().start(2, function(tmr:FlxTimer){ FlxG.switchState(new StoryMenuState()); FlxG.camera.fade(0x88FFFFFF, 0, true);});
-						//});
+//						PlayState.loadSong("ron", "hard");
+						FlxG.switchState(new PlayState());
+						PlayState.loadWeek({
+							name: "main",
+							id: "main", // idk what this is i would use the week name lol
+							sprite: null,
+							chars: [null, null, null],
+							songs: [{name: 'ron', hide: false}, {name: 'wasted', hide: false}, {name: 'ayo', hide: false}, {name: 'bloodshed', hide: false}, {name: 'trojan-virus', hide: false},],
+							difficulties: ['hard']
+							}, "hard");
+/*						PlayState.loadWeek("ron", "hard");
+						PlayState.isStoryMode = true;
+						FlxG.switchState.isStoryMode = true;
+						PlayState.storyWeek = {
+							name: "ron"
+						}
+*/						/*StoryMenuState.musicTime = FlxG.sound.music.time;
+						new StoryMenuState();
+						transitioningToIdiotism = true;
+						rainbTmr.cancel();
+						new FlxTimer().start(1.5, function(tmr:FlxTimer){
+							FlxG.camera.fade(0x88FFFFFF, 0.6, false);
+							new FlxTimer().start(2, function(tmr:FlxTimer){ FlxG.switchState(new StoryMenuState()); FlxG.camera.fade(0x88FFFFFF, 0, true);});
+						});
 						var video:misc.MP4Handler = new misc.MP4Handler();
 						openSubState(new misc.CustomFadeTransition(.8, false));
+												video.playMP4(Paths.videoRon('ron'), new PlayState(), false, false, false);
+						*/
 						new FlxTimer().start(.5, function(tmr:FlxTimer)
 						{
 							trace("hi");
@@ -104,6 +132,9 @@ function create() {
 function update(elapsed:Float) {
 	if (FlxG.sound.music.volume < 0.8)
 		FlxG.sound.music.volume += 0.5 * elapsed;
+	time += elapsed;
+		chrom.data.rOffset.value = [chromeOffset*Math.sin(time)];
+		chrom.data.bOffset.value = [chromeOffset*Math.sin(time)];
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = false;
 		persistentDraw = true;

@@ -17,6 +17,7 @@ function new()
     if (FlxG.save.data.colour == null) FlxG.save.data.colour = true;
     //if (FlxG.save.data.saturation == null) FlxG.save.data.saturation = true;
     //if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
+    if (FlxG.save.data.chromeOffset == null) FlxG.save.data.chromeOffset = 0.5;
     if (FlxG.save.data.vhs == null) FlxG.save.data.vhs = true;
     if (FlxG.save.data.rain == null) FlxG.save.data.rain = true;
     
