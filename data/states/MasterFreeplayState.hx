@@ -11,7 +11,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
-import FreeplayState;
+import funkin.menus.FreeplayState;
 import sys.FileSystem;
 import funkin.backend.MusicBeatState;
 import flixel.group.FlxSpriteGroup;
@@ -138,29 +138,27 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		switch(curSelectedMaster) {
 			case 0:
 				cooltext.text = "MAIN";
-				FreeplayState.mode = 'main';
 			case 1:
 				cooltext.text = "CLASSIC";
-				FreeplayState.mode = 'classic';
 			case 2:
 				cooltext.text = "EXTRAS";
-				FreeplayState.mode = 'extras';
 		}
 		if(controls.RIGHT_P)
 		{
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			CoolUtil.playMenuSFX(0, 0.7);
 			changeSelection(1);
 		}
 
 		if(controls.LEFT_P)
 		{
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			CoolUtil.playMenuSFX(0, 0.7);
 			changeSelection(-1);
 		}
 
 		if(controls.ACCEPT)
 		{
 			FlxG.switchState(new FreeplayState());
+			FlxG.save.data.freeplaything = curSelectedMaster;
 		}
 		if(controls.DOWN_P)
 		{
