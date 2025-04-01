@@ -47,6 +47,12 @@ for (i in 0...songs.length)
 		grpSongs.members[i].y += (Math.sin(i+time)/2);
 	}
 }
+function postUpdate(elapsed:Float) {
+if(controls.BACK)
+	{
+		FlxG.switchState(new ModState('MasterFreeplayState'));
+	}
+}
 function shadering() 
 {
 	var curSong = songs[curSelected].displayName;
@@ -63,6 +69,9 @@ function shadering()
 		case 'COOL':0xE00020;
 		default: 0xFFFFFFFF;		
 	}
+}
+function create() {
+	if(curSelected >= songs.length) curSelected = 0;
 }
 function postCreate() {
 	FlxG.cameras.add(camText, false);

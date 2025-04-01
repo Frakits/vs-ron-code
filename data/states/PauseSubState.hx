@@ -1,32 +1,18 @@
 import funkin.backend.utils.FunkinParentDisabler;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.FlxSubState;
-import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.input.keyboard.FlxKey;
-import flixel.sound.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.FlxCamera;
-import flixel.util.FlxStringUtil;
 import funkin.options.Options;
 import funkin.options.OptionsMenu;
 import funkin.options.keybinds.KeybindsOptions;
+import funkin.editors.charter.Charter;
 import Sys;
-//versus_fucking_ron_the_fucking_something_moment
 
-var parentDisabler:FunkinParentDisabler;
 var optionArray = ["resume song", "restart song", "shut down", "log off"];
 var curSelected = 0;
 var optionButtons = [];
 var pauseMusic:FlxSound;
 var bit:CustomShader  = new CustomShader("8bitcolor");
 var camPause:FlxCamera;
-override function create() {
-    parentDisabler = new FunkinParentDisabler();
+function postCreate() {
+    var parentDisabler = new FunkinParentDisabler();
 	add(parentDisabler);
 
 	camPause = new FlxCamera();
@@ -35,7 +21,6 @@ override function create() {
 	FlxTween.cancelTweensOf(camPause);
     
 	pauseMusic = FlxG.sound.load(Paths.music('breakfast'), 0, true);
-	pauseMusic.persist = false;
 	pauseMusic.group = FlxG.sound.defaultMusicGroup;
 	pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 	
@@ -75,7 +60,9 @@ override function update(elapsed:Float) {
 					case "log off":
 						PlayState.deathCounter = 0;
 						PlayState.seenCutscene = false;
-						if(PlayState.isStoryMode) {
+						if (PlayState.chartingMode && Charter.undos.unsaved)
+                            PlayState.instance.saveWarn(false);
+						else if(PlayState.isStoryMode) {
 							FlxG.switchState(new ModState("DesktopState"));
 						} else {
                             FlxG.switchState(PlayState.isStoryMode ? new StoryMenuState() : new FreeplayState());
@@ -90,9 +77,10 @@ override function update(elapsed:Float) {
     if (controls.UP_P) { curSelected -= 1; FlxG.sound.play(Paths.sound('scrollFunny'), 0.6); }
     curSelected = (curSelected > optionArray.length - 1 ? 0 : (curSelected < 0 ? optionArray.length - 1 : curSelected));
 }
-FlxG.camera.addShader(bit);
-bit.data.enablethisbitch.value = [1.];
+if (FlxG.save.data.colour) {FlxG.camera.addShader(bit);
+bit.data.enablethisbitch.value = [1.];}
 function destroy() {
     FlxG.camera.removeShader(bit);
     FlxG.sound.destroySound(pauseMusic);
+	FlxG.cameras.remove(camPause);
 }

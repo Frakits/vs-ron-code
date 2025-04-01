@@ -1,16 +1,14 @@
+import flixel.effects.particles.FlxParticle;
+import flixel.effects.particles.FlxTypedEmitter;
+
 var time = 0;
 var mosaic:CustomShader = new CustomShader("mosaic");
 var chrom:CustomShader  = new CustomShader("chromatic aberration");
 function postCreate(){
-    healthBarBG.alpha = 0;
-    healthBar.alpha = 0;
-	missesTxt.alpha = 0;
-	accuracyTxt.alpha = 0;
-    scoreTxt.alpha = 0;
-    iconP1.visible = false;
-    iconP2.visible = false;
-	scoreTxt.alpha = 0;
-	comboGroup.visible = false;
+
+for(i in [healthBarBG1,healthBarBG2,healthBar1,missesTxt,accuracyTxt,scoreTxt,iconP1,iconP2,scoreTxt,comboGroup]){
+	i.alpha=0.001;
+}
 	camHUD.color = FlxColor.GRAY;
 }
 override function update(elapsed:Float){time += elapsed;
@@ -22,16 +20,10 @@ function stepHit(curStep){
 		defaultCamZoom += 0.2;
 		case 256:
 		camHUD.color = FlxColor.WHITE;
-		healthBarBG.alpha = 1;
-		healthBar.alpha = 1;
-		missesTxt.alpha = 1;
-		accuracyTxt.alpha = 1;
-		scoreTxt.alpha = 1;
-		iconP1.visible = true;
-		iconP2.visible = true;
+		for(i in [healthBarBG1,healthBarBG2,healthBar1,missesTxt,accuracyTxt,scoreTxt,iconP1,iconP2,scoreTxt,comboGroup]){
+			i.alpha=1;
+		}
 		defaultCamZoom -= 0.1;
-		camHUD.alpha = 1;
-		comboGroup.visible = true;
 		FlxG.camera.flash(FlxColor.WHITE, 1);
 //		insert(members.indexOf(stage.getSprite("wbg")), snowemitter); 
 		case 752:

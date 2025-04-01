@@ -1,12 +1,8 @@
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxSpriteGroup;
-
 class Alphabetthing extends Alphabet
 {
 	public var forceX:Float = Math.NEGATIVE_INFINITY;
 	public var trackingSpr:FlxSprite;
+	public var autoOffset:Bool = true;
 	public var targetY:Float = 0;
 	public var yMult:Float = 120;
 	public var yAdd:Float = 0;
@@ -20,6 +16,12 @@ class Alphabetthing extends Alphabet
 		if (trackingSpr != null) {
 			trackingSpr.setPosition(forceX - (25 + trackingSpr.width), y + (height / 2) - (trackingSpr.height / 2));
 		}
+		var it:Int = 0;
+		if (autoOffset)
+			for (i in this.members) {
+				if (it != 0 && i != null) i.offset.x = ((1 - i.scale.x) * 50) * it;
+				it++;
+			}
 		if(forceX != Math.NEGATIVE_INFINITY) 
 			x = forceX;
 		if (isMenuItem)

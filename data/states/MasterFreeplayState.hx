@@ -120,11 +120,10 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		cooltext = new FlxText(0, 5, 0, "", 96);
 		cooltext.setFormat(Paths.font("vcr.ttf"), 96, FlxColor.WHITE);
 		cooltext.scrollFactor.set(0,0);
-		cooltext.screenCenter();
+		cooltext.screenCenter(FlxAxes.X);
 		cooltext.cameras = [cameraText];
 		add(cooltext);
 		cooltext.y = 125;
-        cooltext.x = 550;
 
 	}
 	var accepted:Bool = false;
@@ -143,6 +142,7 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 			case 2:
 				cooltext.text = "EXTRAS";
 		}
+		cooltext.screenCenter(FlxAxes.X);
 		if(controls.RIGHT_P)
 		{
 			CoolUtil.playMenuSFX(0, 0.7);
