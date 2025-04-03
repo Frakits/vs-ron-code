@@ -11,7 +11,7 @@ import funkin.backend.chart.Chart;
 var time:Float = 0;
 var crt:CustomShader  = new CustomShader("fake CRT");
 var chrom:CustomShader  = new CustomShader("chromatic aberration");
-var fish:CustomShader  = new CustomShader("fisheye");
+var fish:CustomShader  = new CustomShader("fisheye copy");
 var wig:CustomShader  = new CustomShader("glitchsmh");
 var grey:CustomShader  = new CustomShader("grayscale");
 
