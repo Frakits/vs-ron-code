@@ -1,61 +1,68 @@
-import flixel.ui.FlxBar;
 import flixel.math.FlxRect;
+import StringTools;
+var evilMode = false;
+var classical = StringTools.endsWith(curSong, "classic");
+var img = "game/healthBar/healthBarintheworks";
+var barbg:FlxSprite;
+var barbg2:FlxSprite;
 
-public var healthBarBG1:FlxSprite;
-public var healthBarBG2:FlxSprite;
-public var healthBar1:FlxBar;
+function postCreate()
+{
+	if (!classical)
+	{
+		barbg2 = new FlxSprite().loadGraphic(Paths.image(img));
+		insert(members.indexOf(healthBarBG)+1, barbg2);
+		
+		barbg = new FlxSprite().loadGraphic(Paths.image(img));
+		insert(members.indexOf(barbg2)+1, barbg);
 
-function evilbar() {
-    healthBarBG1.loadGraphic(Paths.image("game/healthbar/healthBarintheworks2"));
-    healthBarBG2.loadGraphic(Paths.image("game/healthbar/healthBarintheworks2"));
-    for(i in [healthBarBG1 , healthBarBG2]){
-        i.x-=100;
-        i.y-=35;
-    }
-    iconP1.y -= 6;
-    iconP2.y -= 6;
-    healthBar1.setGraphicSize(800,Std.int(healthBar1.height));
-    healthBar1.updateHitbox();
-    healthBar1.screenCenter(FlxAxes.X);
-    healthBar1.update(0);
-    healthBarBG1.color = boyfriend.iconColor;
-    healthBarBG2.color = dad.iconColor;
+		barbg.cameras = barbg2.cameras = [camHUD];
+		barbg.y = barbg2.y = FlxG.height * 0.88;
+		barbg.screenCenter(0x01);
+		barbg2.screenCenter(0x01);
+		
+		healthBarBG.visible = healthBar.visible = false;
+
+		barbg.color = CoolUtil.getColorFromDynamic(boyfriend.xml.get("color"));
+		barbg2.color = CoolUtil.getColorFromDynamic(dad.xml.get("color"));
+	}
 }
 
-function create() {
-    healthBarBG1 = new FlxSprite().loadGraphic(Paths.image('game/healthbar/healthBarintheworks'));
-    healthBarBG1.y = FlxG.height * 0.89;
-    healthBarBG1.screenCenter(FlxAxes.X);
-    healthBarBG1.scale.set(1,.85);
-    healthBarBG2 = new FlxSprite().loadGraphic(Paths.image('game/healthbar/healthBarintheworks'));
-    healthBarBG2.y = FlxG.height * 0.89;
-    healthBarBG2.screenCenter(FlxAxes.X);
-    healthBarBG2.scale.set(1,.85);
-    
-    healthBar1 = new FlxBar(healthBarBG1.x + 4, healthBarBG1.y + 4, 'RIGHT_TO_LEFT', Std.int(healthBarBG1.width - 8), Std.int(healthBarBG1.height - 8), this,
-        'health', 0, 2);
+function switchToCoolHealthBar() {
+	evilMode = !evilMode;
+	if (evilMode == true)
+	{
+		barbg.loadGraphic(Paths.image(img+"2"));
+		barbg2.loadGraphic(Paths.image(img+"2"));
+
+		barbg.setGraphicSize(800,Std.int(barbg.height));
+		barbg.updateHitbox();
+		barbg.screenCenter(0x01);
+		barbg2.screenCenter(0x01);
+		
+		barbg.y -= 24;
+		barbg2.y -= 24;
+		
+		barbg.x += 4;
+		barbg2.x += 4;
+	}
+	else
+	{
+		barbg.loadGraphic(Paths.image(img));
+		barbg2.loadGraphic(Paths.image(img));
+
+		barbg.setGraphicSize(601,Std.int(barbg.height));
+		barbg.updateHitbox();
+		
+		barbg.y = barbg2.y = FlxG.height * 0.88;
+		
+		barbg.screenCenter(0x01);
+		barbg2.screenCenter(0x01);
+	}
 }
-function postUpdate(elapsed:Float) {
-    healthBarBG1.clipRect = new FlxRect((2-health)/2*healthBarBG1.width,0,health/2*healthBarBG1.width,healthBarBG1.height);
-    healthBarBG2.clipRect = new FlxRect(0,0,(2-health)/2*healthBarBG2.width,healthBarBG2.height);
-    healthBarBG1.clipRect = healthBarBG1.clipRect;
-    healthBarBG2.clipRect = healthBarBG2.clipRect; 
-}
-function postCreate() {
-    switch(curSong)
-    {
-        case "ron-classic" | "wasted-classic" | "ayo-classic" | "bloodshed-classic" | "trojan-virus-classic" | "bleeding-classic":
-            trace("haha "+ curSong);
-        default:
-        healthBarBG.alpha = healthBar.alpha=0.0001;
-        insert(1,healthBarBG1);
-        insert(1,healthBarBG2);
-        healthBar1.createFilledBar(dad.iconColor,boyfriend.iconColor);
-    
-        healthBarBG1.color = boyfriend.iconColor;
-        healthBarBG2.color = dad.iconColor;
-        for(i in [healthBarBG1 , healthBarBG2 , healthBar1]){
-            i.cameras = [camHUD];
-        }
-    }
+
+function update()
+{
+	if (classical) return;
+	barbg.clipRect = new FlxRect((2-health)/2*barbg.width,0,health/2*barbg.width,barbg.height);
 }

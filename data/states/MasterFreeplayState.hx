@@ -162,7 +162,8 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		}
 		if(controls.DOWN_P)
 		{
-		FlxG.switchState(new FreeplayState());
+			FlxG.switchState(new FreeplayState());
+			FlxG.save.data.freeplaything = curSelectedMaster;
 	    }
 		if(controls.BACK)
 		{

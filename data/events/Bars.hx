@@ -15,7 +15,7 @@ function onEvent(_) {
 		var sizeNeeded = _.event.params[0];
 		var timeNeeded = _.event.params[1];
 		var easingType = (_.event.params[2] == "In" ? FlxEase.circIn : 
-			(_.event.params[2] == "Out" ? FlxEase.circOut : boyfriend.FlxEase.circInOut)
+			(_.event.params[2] == "Out" ? FlxEase.circOut : FlxEase.circInOut)
 		);
 
 		FlxTween.tween(bar1, {y: -560 + (10 * Std.int(sizeNeeded))}, Conductor.crochet / 1000 * timeNeeded, {ease: easingType});

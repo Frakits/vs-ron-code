@@ -14,19 +14,17 @@ var chrom:CustomShader  = new CustomShader("chromatic aberration");
 var fish:CustomShader  = new CustomShader("fisheye");
 var wig:CustomShader  = new CustomShader("glitchsmh");
 var grey:CustomShader  = new CustomShader("grayscale");
-trace(FlxG.save.data.freeplaything);
 
-	songs = [];
-	songRealList = [
-		["ron", "wasted", "ayo", "bloodshed", "trojan-virus"],
-		["ron-classic", "wasted-classic", "ayo-classic", "bloodshed-classic", "trojan-virus-classic", "bleeding-classic"],
-		["Tutorial", "bloodbath", "official-debate", "gron", "difficult-powers", "bijuu", "holy-shit-dave-fnf", "slammed", "ron-dsides", "lights-down-remix", "pretty-wacky", "certified-champion", "rong-aisle", "bloodshed-legacy-redux", "clusterfunk", "awesome-ron", "oh-my-god-hes-ballin", "fardventure", "bleeding"]
-	];
-	rsongsFound = songRealList[FlxG.save.data.freeplaything];
+songs = [];
+songRealList = [
+	["ron", "wasted", "ayo", "bloodshed", "trojan-virus"],
+	["ron-classic", "wasted-classic", "ayo-classic", "bloodshed-classic", "trojan-virus-classic", "bleeding-classic"],
+	["Tutorial", "bloodbath", "official-debate", "gron", "difficult-powers", "bijuu", "holy-shit-dave-fnf", "slammed", "ron-dsides", "lights-down-remix", "pretty-wacky", "certified-champion", "rong-aisle", "bloodshed-legacy-redux", "clusterfunk", "awesome-ron", "oh-my-god-hes-ballin", "fardventure", "bleeding"]
+];
+rsongsFound = songRealList[FlxG.save.data.freeplaything];
 	
-	trace(rsongsFound);
-	for(s in rsongsFound)
-		songs.push(Chart.loadChartMeta(s, "hard", true));
+for(s in rsongsFound)
+	songs.push(Chart.loadChartMeta(s, "hard", true));
 
 //cam
 var camWhat:FlxCamera;
