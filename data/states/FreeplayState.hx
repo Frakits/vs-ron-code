@@ -86,7 +86,6 @@ function postCreate() {
 	add(bg);
 
 	portrait = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/portraits/ron'));
-	portrait.scale.set(0.51,0.51);
 	portrait.updateHitbox();
 	add(portrait);
 	

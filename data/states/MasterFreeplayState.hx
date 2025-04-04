@@ -64,14 +64,12 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		add(bg);
 
 		vimage = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/freeplay select/ground'), false, 1, 1);
-		vimage.scale.set(0.5,0.5);
 		vimage.scrollFactor.set();
 		vimage.screenCenter();
 		vimage.cameras = [cameraText];
 		add(vimage);
 
 		image = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/freeplay select/ron'), false, 1, 1);
-		image.scale.set(0.5,0.5);
 		image.scrollFactor.set();
 		image.screenCenter();
 		image.ID = 0;
@@ -92,7 +90,6 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		loBg.cameras = [cameraText];
 
 		image = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/freeplay select/ron'), false, 1, 1);
-		image.scale.set(0.5,0.5);
 		image.scrollFactor.set();
 		image.screenCenter();
 		image.ID = 0;
@@ -100,7 +97,7 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		add(image);
 
 		classicImage = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/freeplay select/evilron'), false, 1, 1);
-		classicImage.scale.set(0.65,0.65);
+		classicImage.scale.set(1.1,1.1);
 		classicImage.scrollFactor.set();
 		classicImage.screenCenter();
 		classicImage.ID = 1;
@@ -109,7 +106,6 @@ if (FlxG.save.data.chrom) {cameraText.addShader(chrom);
 		add(classicImage);
 
 		extraImage = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/freeplay select/doyne'), false, 1, 1);
-		extraImage.scale.set(0.5,0.5);
 		extraImage.scrollFactor.set();
 		extraImage.screenCenter();
 		extraImage.ID = 2;
