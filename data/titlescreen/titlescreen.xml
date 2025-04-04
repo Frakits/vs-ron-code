@@ -4,23 +4,22 @@
 		<sprite name="logoBack" sprite="trueTitleBack" x="0" y="0" />
 		<sprite name="logo" sprite="trueTitleLogo" x="0" y="0" />
 
-		<titleEnter sprite="trueTitlePlay" x="0" y="0" />
 	</sprites>
 
 	<intro length="16">
 		<text beat="1">
-			<line text="ninjamuffin99" />
-			<line text="phantomArcade" />
-			<line text="kawaisprite" />
-			<line text="evilsk8er" />
+			<line text="A" />
+			<line text="FUCK TON" />
+			<line text="OF" />
+			<line text="PEOPLE" />
 		</text>
 
 		<text beat="3">
-			<line text="ninjamuffin99" />
-			<line text="phantomArcade" />
-			<line text="kawaisprite" />
-			<line text="evilsk8er" />
-			<line text="presents" />
+			<line text="A" />
+			<line text="FUCK TON" />
+			<line text="OF" />
+			<line text="PEOPLE" />
+			<line text="PRESENT" />
 		</text>
 
 		<text beat="4" /> <!-- clears the screen !-->
@@ -33,7 +32,7 @@
 		<text beat="7">
 			<line text="In association" />
 			<line text="with" />
-			<line text="Newgrounds" />
+			<line text="not patrick" />
 			<sprite path="menus/titlescreen/newgrounds_logo" scale="0.8"/>
 		</text>
 
@@ -51,18 +50,18 @@
 		<text beat="12"/>
 
 		<text beat="13">
-			<line text="Friday" />
+			<line text="LITERALLY EVERY" />
 		</text>
 
 		<text beat="14">
-			<line text="Friday" />
-			<line text="Night" />
+			<line text="LITERALLY EVERY" />
+			<line text="FANMADE FNF MOD" />
 		</text>
 
 		<text beat="15">
-			<line text="Friday" />
-			<line text="Night" />
-			<line text="Funkin'" />
+			<line text="LITERALLY EVERY" />
+			<line text="FANMADE FNF MOD" />
+			<line text="EVER'" />
 		</text>
 	</intro>
 </titlestate>
