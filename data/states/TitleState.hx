@@ -5,7 +5,7 @@ var fish:CustomShader  = new CustomShader("colorizer");
 var chrom:CustomShader  = new CustomShader("chromatic aberration");
 var time:Float = 0;
 var chromeOffset = (FlxG.save.data.chromeOffset/350);
-function update() {
+function update(elapsed:Float) {
 	if (done != (done = true)) {
 
 		animScreen = new FlxSprite();
