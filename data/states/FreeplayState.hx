@@ -1,8 +1,8 @@
+import Alphabetthing;
 import flixel.graphics.FlxGraphic;
+import funkin.backend.chart.Chart;
 import flixel.effects.particles.FlxParticle;
 import flixel.effects.particles.FlxTypedEmitter;
-import funkin.backend.chart.Chart;
-import Alphabetthing;
 
 //shaders
 var time:Float = 0;
@@ -25,39 +25,30 @@ modelistt = modelist[FlxG.save.data.freeplaything];
 
 for(s in rsongsFound)
 	songs.push(Chart.loadChartMeta(s, "hard", true));
-//cam
 var camText:FlxCamera = new FlxCamera();
 camText.bgColor = null;
-
-var portrait:FlxSprite;
-var tweedledip:FlxSprite;
-var tweedleshit:FlxSprite;
+var portrait:FlxSprite = new FlxSprite();
+var portraitOverlay:FlxSprite = new FlxSprite();
 var preload = [];
-var grpSongs2:FlxTypedGroup<Alphabet> = [];
+var grpSongs2:FlxTypedGroup<Alphabet> = new FlxTypedGroup();
 var iconArray2:Array<HealthIcon> = [];
-var modeText:FlxText;
+var modeText:FlxText = new FlxText(0,0,0,modelistt,0).setFormat(Paths.font("w95.otf"),48,FlxColor.WHITE);
 var chromeOffset = (FlxG.save.data.chromeOffset/350);
-function update(elapsed:Float){time += elapsed;
+function postUpdate(elapsed:Float){time += elapsed;
+	if(controls.BACK)FlxG.switchState(new ModState('MasterFreeplayState'));
 	chrom.data.rOffset.value = [chromeOffset*Math.sin(time)];
 	chrom.data.bOffset.value = [-chromeOffset*Math.sin(time)];
-	glitch.data.iTime.value = [0.005*Math.sin(time)];
+	glitch.data.iTime.value = [time];
 	vhs.data.iTime.value = [time];
 
 	for (i in 0...songs.length)
 		grpSongs2.members[i].y += (Math.sin(i+time)/2);
-
 	for (item in grpSongs2.members)
-	{
-		item.forceX = FlxMath.lerp(item.x, 125 + (65 * (item.ID - curSelected)), lerpFix(0.1));
-		for (i in 0...songs.length)
-			item.y += (Math.sin(i+elapsed)/2);
-	}
-}
-function postUpdate(elapsed:Float){
-	if(controls.BACK)FlxG.switchState(new ModState('MasterFreeplayState'));
+		item.forceX = FlxMath.lerp(item.x, 125 + (65 * (item.ID - curSelected)),lerpFix(0.1));
+	portraitOverlay.y = portrait.y;
+	portraitOverlay.angle = portrait.angle;
 }
 function create() {
-	grpSongs2 = new FlxTypedGroup();
 	add(grpSongs2);
 	for (i in 0...songs.length)
 	{
@@ -75,29 +66,37 @@ function create() {
 	}
 	for (i in 0...iconArray2.length) remove(iconArray2[i]);
 	if(curSelected >= songs.length) curSelected = 0;
-	modeText = new FlxText(10, 10, 0, modelistt, 48);
-	modeText.setFormat(Paths.font("w95.otf"), 48, FlxColor.WHITE);
 	insert(2,modeText);
 
-	portrait = new FlxSprite().loadGraphic(Paths.image('menus/freeplay/portraits/ron'));
 	portrait.updateHitbox();
 	insert(2,portrait);
 }
 function shadering() {
-    switch(songs[curSelected].displayName)
+	var cursong = songs[curSelected].displayName;
+    switch(cursong)
     {
-		case "gron":if(FlxG.save.data.grey)FlxG.camera.addShader(grey);camText.addShader(grey);
-		case "trojan-virus":glitch.data.on.value = [1.];
-		case "Bleeding":diffText.color=0xE00020; glitch.data.on.value = [1.];
-		default:FlxG.camera.removeShader(grey); camText.removeShader(grey);
-		glitch.data.on.value = [0]; diffText.color=0xFFFFFFFF;
+		case"gron":if(FlxG.save.data.grey)FlxG.camera.addShader(grey);camText.addShader(grey);
+		case"trojan-virus":glitch.data.on.value = [1.];
+		case"Bleeding":diffText.color=0xE00020;glitch.data.on.value = [1.];
+		default:FlxG.camera.removeShader(grey);camText.removeShader(grey);
+		glitch.data.on.value = [0];diffText.color=0xFFFFFFFF;
     }
+	if ((cursong == 'slammed')||(cursong == 'oh-my-god-hes-ballin'))
+	{
+		portraitOverlay.loadGraphic(Paths.image('menus/freeplay/portraits/'+cursong+'-over'));
+		portraitOverlay.updateHitbox();
+		portraitOverlay.screenCenter();
+		new FlxTimer().start(0.2, function(tmr:FlxTimer)
+		portraitOverlay.visible = true);
+	}
+	else
+		new FlxTimer().start(0.16, function(tmr:FlxTimer)
+		portraitOverlay.visible = false);
 }
 function postCreate() {
 	FlxG.cameras.add(camText, false);
 	remove(grpSongs);
 	for (i in iconArray) remove(i);
-	if (FlxG.save.data.glitch)FlxG.camera.addShader(glitch);
 
 	bg.frames = Paths.getSparrowAtlas('menus/freeplay/mainbgAnimate');
 	if(FlxG.save.data.freeplaything == 1){
@@ -112,10 +111,9 @@ function postCreate() {
 	var bar:FlxSprite = CoolUtil.loadAnimatedGraphic(new FlxSprite(490,-20), Paths.image('menus/freeplay/bar'));
 	add(bar);
 
-	insert(4,scoreText);
-	scoreBG.alpha = 0.3;
-	insert(3,scoreBG);
-	insert(4,diffText);
+	for (i in [scoreText,scoreBG,diffText,portraitOverlay])
+		insert(5,i);
+		scoreBG.alpha = 0.3;
 	
 	for (i in 0...iconArray2.length) add(iconArray2[i]);
 	for (i in songs) {
@@ -124,11 +122,9 @@ function postCreate() {
 		preload.push(graphic);
 	}
 	changeSelection(0, true);
+	if (FlxG.save.data.glitch)FlxG.camera.addShader(glitch);
 	if (FlxG.save.data.crt)FlxG.camera.addShader(crt);
-	if (FlxG.save.data.chrom) {FlxG.camera.addShader(chrom);
-		chrom.data.rOffset.value = [1/2];
-		chrom.data.bOffset.value = [1 * -1];
-    }
+	if (FlxG.save.data.chrom)FlxG.camera.addShader(chrom);
 	camText.addShader(fish);
 	fish.data.MAX_POWER.value = [0.2];
 	var coolemitter:FlxTypedEmitter = new FlxTypedEmitter();

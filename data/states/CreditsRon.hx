@@ -1,85 +1,74 @@
+import Sys;
+import Alphabetthing;
 import flixel.math.FlxRandom;
 import openfl.display.BitmapData; 
 import funkin.backend.utils.DiscordUtil;
-import Alphabetthing;
-	var creditJSON:Dynamic;
-	var nameGroup = [];
-	var curSelected:Int = 0;
-	var largePortrait:FlxSprite;
-	var dividingBar:FlxSprite = new FlxSprite(775, 400).makeGraphic(400, 5);
-	var descText:FlxText;
-	var socialMediaText:FlxText;
-	var socialMediaFavicon:FlxSprite;
-	var time:Float = 0;
-	var lerpVal:Float = FlxMath.bound(time * 8., 0, 1);
-	var	bg:FlxSprite;
+import flixel.text.FlxText.FlxTextAlign;
+var creditJSON:Dynamic;
+var nameGroup = [];
+var curSelected:Int = 0;
+var largePortrait:FlxSprite = new FlxSprite(800, 20).loadGraphic(Paths.image("credits/seezee"));
+var dividingBar:FlxSprite = new FlxSprite(775, 400).makeGraphic(400, 5);
+var descText:FlxText = new FlxText(780-49, 425, 490, "seezee", 20);
+var socialMediaText:FlxText = new FlxText(710,675,0,"Press enter to open social media link", 20);
+var socialMediaFavicon:FlxSprite = new FlxSprite(1165+35, 673);
+var time:Float = 0;
 
-	override function create() {
-		DiscordUtil.changePresence('Looking at Credits', null);
-		bg = new FlxSprite();
-		bg.frames = Paths.getSparrowAtlas('menus/freeplay/classicbgAnimate');
-		bg.color = FlxColor.RED;
-		bg.animation.addByPrefix('animate', 'animate', 24, true);
-		bg.animation.play('animate');
-		bg.scale.set(2,2);
-		bg.updateHitbox();
-		bg.screenCenter();
-		add(bg);
-		creditJSON = Json.parse(Assets.getText(Paths.json("credit")));
-		for (i in 0...creditJSON.length){
-			var j = new Alphabetthing(0, 100 + (150 * i), creditJSON[i].handle,true);
-			j.ID = i;
-			j.forceX = 100;
-			nameGroup.push(j);
-			add(j);
-			var e = new FlxSprite().loadGraphic(Paths.image("credits/" + creditJSON[i].name));
-			e.setGraphicSize(50, 50);
-			e.updateHitbox();
-			e.antialiasing = true;
-			j.trackingSpr = e;
-			add(e);
-		}
-		largePortrait = new FlxSprite(800, 20).loadGraphic(Paths.image("credits/seezee"));
-		largePortrait.setGraphicSize(350, 350);
-		largePortrait.updateHitbox();
-		largePortrait.antialiasing = true;
-		descText = new FlxText(780-49, 425, 490, "seezee", 20);
-		descText.alignment = 'CENTER';
-		socialMediaText = new FlxText(710,675,0,"Press enter to open social media link", 20);
-		socialMediaFavicon = new FlxSprite(1165+35, 673);
-		var loBg = new FlxSprite(700, 0).makeGraphic(999, 999, 0xFF000000);
-		loBg.alpha = 1;
-		loBg.scrollFactor.set();
-		add(loBg);
-		add(socialMediaFavicon);
-		socialMediaFavicon.visible = false;
-		add(socialMediaText);
-		add(largePortrait);
-		add(descText);
-		add(dividingBar);
+function create() {
+	DiscordUtil.changePresence('Looking at Credits', null);
+	bg = CoolUtil.loadAnimatedGraphic(new FlxSprite(340,180), Paths.image('menus/freeplay/classicbgAnimate'));
+	bg.color = FlxColor.RED;
+	bg.screenCenter();
+	bg.scale.set(2,2);
+	insert(0,bg);
+	creditJSON = Json.parse(Assets.getText(Paths.json("credit")));
+	for (i in 0...creditJSON.length){
+		var j = new Alphabetthing(0, 100 + (150 * i), creditJSON[i].handle,true);
+		j.ID = i;
+		j.forceX = 100;
+		nameGroup.push(j);
+		add(j);
+		var e = new FlxSprite().loadGraphic(Paths.image("credits/" + creditJSON[i].name));
+		e.setGraphicSize(50, 50);
+		e.updateHitbox();
+		e.antialiasing = true;
+		j.trackingSpr = e;
+		add(e);
+	}
+	largePortrait.antialiasing = true;
+	descText.alignment = FlxTextAlign.CENTER;
+	var loBg = new FlxSprite(700, 0).makeGraphic(999, 999, 0xFF000000);
+	loBg.alpha = 1;
+	add(loBg);
+	add(socialMediaFavicon);
+	socialMediaFavicon.visible = false;
+	add(socialMediaText);
+	add(largePortrait);
+	add(descText);
+	add(dividingBar);
 
-		changeSelection(0);
+	changeSelection(0);
+}
+var keyCount:Int = 0;
+var antiSpam:Bool = false;
+function update(elapsed:Float) {
+	time += elapsed;	
+	if (time > 1) keyCount = 0;
+	if (!antiSpam) {
+		if (controls.BACK)	FlxG.switchState(new MainMenuState());
+		if (controls.UP_P) {changeSelection(-1);keyCount=0;FlxG.sound.play(Paths.sound('scrollMenu')); time = 0; keyCount += 1;}
+		if (controls.DOWN_P) {changeSelection(1);FlxG.sound.play(Paths.sound('scrollMenu')); time = 0; keyCount += 1;}
+		if (controls.DOWN_P || controls.UP_P) {dividingBar.scale.x += 0.2; time = 0; keyCount += 1;}
 	}
-	var keyCount:Int = 0;
-	var antiSpam:Bool = false;
-	override function update(elapsed:Float) {
-		time += elapsed;	
-		if (time > 1) keyCount = 0;
-		if (!antiSpam) {
-			if (controls.BACK) 				FlxG.switchState(new MainMenuState());
-			if (controls.UP_P) {changeSelection(-1);keyCount=0;FlxG.sound.play(Paths.sound('scrollMenu'));}
-			if (controls.DOWN_P) {changeSelection(1);FlxG.sound.play(Paths.sound('scrollMenu'));}
-			if (controls.DOWN_P || controls.UP_P) {dividingBar.scale.x += 0.2; time = 0;}
-		}
-		dividingBar.scale.x = FlxMath.lerp(dividingBar.scale.x, 1, 0.1 / (1));
-		if (controls.ACCEPT && creditJSON[curSelected].social_link != null) CoolUtil.openURL(creditJSON[curSelected].social_link);
-		for (j in nameGroup) {
-			j.y = FlxMath.lerp(j.y, 360 + (150 * (j.ID - curSelected)), 0.1 / (1));
-			if (j.text != null)
-				if (!antiSpam) j.scale.set(FlxMath.lerp(j.scale.x, (4 - Math.abs(j.ID - curSelected)) * (0.3 - (j.text.length * 0.01)), 0.2 / (1)), FlxMath.lerp(j.scale.y, (4 - Math.abs(j.ID - curSelected)) * (0.3 - (j.text.length * 0.01)), 0.05 / (1)));
-			j.forceX = 20+FlxMath.lerp(j.forceX, 100 + -Math.abs(25 * (j.ID - curSelected)), 0.2 / (1));
-		}
+	dividingBar.scale.x = FlxMath.lerp(dividingBar.scale.x, 1, 0.1 / (1));
+	if (controls.ACCEPT && creditJSON[curSelected].social_link != null) CoolUtil.openURL(creditJSON[curSelected].social_link);
+	for (j in nameGroup) {
+		j.y = FlxMath.lerp(j.y, 360 + (150 * (j.ID - curSelected)), 0.1 / (1));
+		if (j.text != null)
+			if (!antiSpam) j.scale.set(FlxMath.lerp(j.scale.x, (4 - Math.abs(j.ID - curSelected)) * (0.3 - (j.text.length * 0.01)), 0.2 / (1)), FlxMath.lerp(j.scale.y, (4 - Math.abs(j.ID - curSelected)) * (0.3 - (j.text.length * 0.01)), 0.05 / (1)));
+		j.forceX = 20+FlxMath.lerp(j.forceX, 100 + -Math.abs(25 * (j.ID - curSelected)), 0.2 / (1));
 	}
+}
 function changeSelection(e) {
 	curSelected += e;
 	if (curSelected > nameGroup.length - 1) keyCount += 1;
